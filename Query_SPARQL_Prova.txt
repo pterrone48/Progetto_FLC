@@ -1,0 +1,87 @@
+Tutti gli individui (istanze) della KB:
+
+SELECT ?individuo
+WHERE {
+  ?individuo a owl:NamedIndividual .
+}
+LIMIT 50
+
+Tutte le classi presenti
+
+SELECT DISTINCT ?classe
+WHERE {
+  ?individuo a ?classe .
+}
+
+Tutti gli eventi
+
+SELECT ?evento
+WHERE {
+  ?evento rdf:type :CyberEvent .
+}
+
+Eventi con una certa tipologia
+
+SELECT ?evento
+WHERE {
+  ?evento rdf:type :CyberEvent .
+  ?evento :hasAttackType :Phishing .
+}
+
+Eventi accaduti in un determinato anno
+
+SELECT ?evento ?year
+WHERE {
+  ?evento :hasYear ?year .
+  FILTER (?year = 2020)
+}
+
+Eventi e le loro date
+
+SELECT ?evento ?data
+WHERE {
+  ?evento :hasEventDate ?data .
+}
+ORDER BY ?data
+
+Tutti gli eventi con origine e destinazione (se presenti)
+
+SELECT ?evento ?origine ?destinazione
+WHERE {
+  ?evento :hasSource ?origine .
+  OPTIONAL { ?evento :hasTarget ?destinazione . }
+}
+
+Tutti gli eventi di tipo DDoS avvenuti nel 2018
+
+SELECT ?evento ?data
+WHERE {
+  ?evento rdf:type :CyberEvent .
+  ?evento :hasAttackType :DDoS .
+  ?evento :hasYear 2018 .
+  OPTIONAL { ?evento :hasEventDate ?data . }
+}
+
+Tipologia di attacco più frequente
+
+SELECT ?tipo (COUNT(?evento) AS ?numEventi)
+WHERE {
+  ?evento :hasAttackType ?tipo .
+}
+GROUP BY ?tipo
+ORDER BY DESC(?numEventi)
+LIMIT 1
+
+Relazioni tra entità diverse (più complessa)
+
+SELECT ?evento ?source ?target ?tipo
+WHERE {
+  ?evento rdf:type :CyberEvent .
+  ?evento :hasSource ?source .
+  ?evento :hasTarget ?target .
+  ?evento :hasAttackType ?tipo .
+}
+ORDER BY ?evento
+
+
+
