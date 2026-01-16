@@ -21,7 +21,7 @@ def clean_text(text):
     tokens = [lemmatizer.lemmatize(w) for w in tokens if w not in stop_words]
     return tokens   
 
-df = pd.read_excel("/Users/user/Desktop/FLC_datasets/Cyber_Databreaches_Healthcare.xlsx")
+df = pd.read_excel("Cyber_Events_Database.xlsx")
 df["tokens"] = df["description"].apply(clean_text)
 
 all_tokens = [w for tokens in df["tokens"] for w in tokens]
@@ -44,6 +44,10 @@ cooc_matrix = pd.DataFrame(0, index=top_words, columns=top_words)
 for (w1, w2), count in cooc.items():
     cooc_matrix.at[w1, w2] = count
 
-cooc_matrix.to_excel("/Users/user/Desktop/matrice_cooccorrenze.xlsx")
+cooc_matrix.to_excel("matrice_cooccorrenze.xlsx")
 
-print("Matrice di co-occorrenza salvata con dimensioni:", cooc_matrix.shape)
+# Il codice elabora il file Excel iniziale. Si utilizza Pandas per gestire i dati.
+# La libreria NLTK pulisce il testo descrittivo e si applica la lemmatizzazione per normalizzare termini.
+# Si isolano le mille parole più frequenti, questa scelta garantisce efficienza computazionale elevata. 
+# Itertools individua le relazioni tra i token. 
+# Si produce una matrice di cooccorrenze finale. L'output viene esportato in formato Excel.

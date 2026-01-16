@@ -1,333 +1,107 @@
-import os
-import sys
-import traceback
-from datetime import datetime
+from owlready2 import *
 import pandas as pd
-from owlready2 import get_ontology, Thing
+from sentence_transformers import SentenceTransformer, util
+import re
+from datetime import datetime
+from tqdm import tqdm
 
-HAVE_EMBEDDINGS = False
-try:
-    from sentence_transformers import SentenceTransformer
-    import numpy as np
-    from sklearn.metrics.pairwise import cosine_similarity
-    HAVE_EMBEDDINGS = True
-except Exception:
-    HAVE_EMBEDDINGS = False
+UCO_FILE = "uco_1.5.owl"
+EXCEL_FILE = "Cyber_Events_Database.xlsx"
 
-# Fuzzy 
-try:
-    from fuzzywuzzy import fuzz
-except Exception:
-    fuzz = None
+def is_valid_val(prop_name, val):
+    v = str(val).lower()
+    if v in ["undetermined", "unknown", "nan", "n/a"]: return False
+    if "cve" in prop_name.lower() and not re.search(r'cve-\d{4}-\d+', v): return False
+    if "date" in prop_name.lower() and not re.search(r'\d{4}', v): return False
+    if "month" in prop_name.lower() and re.fullmatch(r'\d{4}', str(val)): return False
+    return True
 
-OWL_PATH = r"C:\Users\Utente\Downloads\uco_1_5.owl"
-EXCEL_PATH = r"C:\Users\Utente\Desktop\Cyber Events Database - 2014-2024 + Jan & Aug 2025.xlsx"
-OUTPUT_OWL = r"C:\Users\Utente\Desktop\ontologia_popolata_semantic.owl"
-REPORT_CSV = r"C:\Users\Utente\Desktop\ontologia_popolata_semantic_mapping_report.csv"
-CLASSES_DEBUG_CSV = r"C:\Users\Utente\Desktop\onto_classes_debug.csv"
+def clean_iri(text):
+    text = re.sub(r'[^a-zA-Z0-9_]', '_', str(text))
+    return text[:40].strip('_')
 
-NUM_ROWS_TO_TEST = None   
-
-EMBEDDING_MODEL = "all-MiniLM-L6-v2"
-SIMILARITY_THRESHOLD = 0.56
-FUZZY_THRESHOLD = 72
-MAX_SUGGESTIONS = 5
-
-# Mapping
-PROPERTY_MAPPING = {
-    "event_date": "hasEventDate",
-    "year": "hasYear",
-    "month": "hasMonth",
-    "actor": "hasActor",
-    "actor_type": "hasActorType",
-    "organization": "hasOrganization",
-    "industry": "hasIndustry",
-    "motive": "hasMotive",
-    "event_type": "hasEventType",
-    "event_subtype": "hasEventSubtype",
-    "description": "hasDescription",
-    "country": "hasCountry",
-    "actor_countr": "hasActorCountry",
-    "state": "hasState",
-    "county": "hasCounty",
-    "slug": None,
-
-}
-
-def safe_getattr_onto(onto, name):
-    return getattr(onto, name, None)
-
-def list_classes_info(onto):
-    out = []
-    for c in onto.classes():
-        labels = [str(l) for l in getattr(c, "label", [])] if getattr(c, "label", None) else []
-        sup_names = [s.name for s in c.is_a if hasattr(s, "name")]
-        out.append({
-            "name": c.name,
-            "iri": c.iri,
-            "labels": " | ".join(labels),
-            "superclasses": " | ".join(sup_names)
-        })
-    return out
-
-def build_class_reprs(onto):
-    """Return list of tuples (class_obj, [repr strings])"""
-    out = []
-    for c in onto.classes():
-        reprs = []
-        if getattr(c, "label", None):
-            reprs.extend([str(l) for l in c.label])
-        reprs.append(c.name)
-        out.append((c, list(dict.fromkeys([r for r in reprs if r]))))
-    return out
-
-def compute_embeddings_for_corpus(model, class_reprs):
-    texts = [" | ".join(reprs) for _, reprs in class_reprs]
-    embs = model.encode(texts, show_progress_bar=False, convert_to_numpy=True)
-    return embs
-
-def semantic_match(desc, class_reprs, class_embeddings, model):
-    desc_emb = model.encode([desc], show_progress_bar=False, convert_to_numpy=True)
-    sims = cosine_similarity(desc_emb, class_embeddings)[0]
-    results = []
-    for i, score in enumerate(sims):
-        c_obj, reprs = class_reprs[i]
-        results.append((c_obj, float(score), " | ".join(reprs)))
-    results.sort(key=lambda x: x[1], reverse=True)
-    return results
-
-def fuzzy_match(desc, class_reprs, topn=5):
-    results = []
-    for c_obj, reprs in class_reprs:
-        best = 0
-        for r in reprs:
-            try:
-                s = fuzz.partial_ratio(desc.lower(), r.lower()) if fuzz else 0
-            except Exception:
-                s = 0
-            if s > best:
-                best = s
-        results.append((c_obj, best, " | ".join(reprs)))
-    results.sort(key=lambda x: x[1], reverse=True)
-    return results[:topn]
-
-def find_prop_by_similar_name(onto, col_name):
-    """Cerca proprietà nell'ontologia con nomi simili alla colonna."""
-    col_normal = col_name.lower().replace(" ", "").replace("_", "")
-    candidates = []
-    for p in list(onto.properties()):
-        pname = getattr(p, "name", None)
-        if not pname:
-            continue
-        pn = pname.lower().replace(" ", "").replace("_", "")
-        if col_normal in pn or pn in col_normal:
-            candidates.append(pname)
-    return candidates
-
-
-def main():
-    print(f"[{datetime.now()}] Avvio script")
-
-    if not os.path.exists(OWL_PATH):
-        print("ERRORE: OWL non trovato:", OWL_PATH); return
-    if not os.path.exists(EXCEL_PATH):
-        print("ERRORE: Excel non trovato:", EXCEL_PATH); return
-
-    onto = get_ontology(OWL_PATH).load()
-    print(f"Ontologia caricata: {len(list(onto.classes()))} classi trovate.\n")
-
-    # Debug
-    classes_info = list_classes_info(onto)
-    pd.DataFrame(classes_info).to_csv(CLASSES_DEBUG_CSV, index=False)
-    print(f"Lista classi salvata in: {CLASSES_DEBUG_CSV}")
-
-    class_reprs = build_class_reprs(onto)
-    all_class_names_lower = [c.name.lower() for c, _ in class_reprs]
-
-    model = None
-    class_embeddings = None
-    if HAVE_EMBEDDINGS:
-        try:
-            print("Carico modello embeddings:", EMBEDDING_MODEL)
-            model = SentenceTransformer(EMBEDDING_MODEL)
-            class_embeddings = compute_embeddings_for_corpus(model, class_reprs)
-            print("Embeddings create per classi.")
-        except Exception as e:
-            print("ATTENZIONE: problema caricamento embeddings:", e)
-            model = None
-            class_embeddings = None
-
-    # read excel
+def adapt_value(prop, val):
+    if not prop.range: return str(val)
+    target = prop.range[0]
     try:
-        df = pd.read_excel(EXCEL_PATH)
-    except Exception as e:
-        print("ERRORE lettura Excel:", e)
-        return
+        if target == datetime or "dateTime" in str(target):
+            return pd.to_datetime(val).to_pydatetime()
+        if target == int: return int(float(val))
+        if target == float: return float(val)
+        return str(val)
+    except: return str(val)
 
-    if NUM_ROWS_TO_TEST:
-        df = df.head(NUM_ROWS_TO_TEST)
-    print(f"Caricate {len(df)} righe dal file Excel.\n")
-
-    report = []
-
+def run_validated_injection():
+    model = SentenceTransformer('all-mpnet-base-v2')
+    onto = get_ontology(UCO_FILE).load()
+    df = pd.read_excel(EXCEL_FILE).head(500)
+    
     with onto:
-        for idx, row in df.iterrows():
-            try:
-                slug = row.get("slug", f"event_{idx}")
-                instance_name = str(slug).replace(" ", "_")
-                desc = str(row.get("description", "")).strip()
-                desc_lower = desc.lower()
+        all_c = list(onto.classes())
+        all_p = list(onto.properties())
+        obj_p = [p for p in all_p if isinstance(p, ObjectPropertyClass)]
+        dat_p = [p for p in all_p if isinstance(p, DataPropertyClass)]
+        
+        c_embs = model.encode([c.name for c in all_c], convert_to_tensor=True)
+        o_embs = model.encode([p.name for p in obj_p], convert_to_tensor=True)
+        d_embs = model.encode([p.name for p in dat_p], convert_to_tensor=True)
 
-                matched_method = None
-                matched_class = None
-                matched_score = 0.0
-                matched_repr = ""
+        prop_year = getattr(onto, "hasYear", None)
 
-                
-                if model and class_embeddings is not None and desc:
-                    sem_results = semantic_match(desc, class_reprs, class_embeddings, model)
-                    top_cls, top_score, top_repr = sem_results[0]
-                    if top_score >= SIMILARITY_THRESHOLD:
-                        matched_method = "semantic"
-                        matched_class = top_cls
-                        matched_score = top_score
-                        matched_repr = top_repr
-                    else:
-                        top_suggestions_sem = sem_results[:MAX_SUGGESTIONS]
-                else:
-                    top_suggestions_sem = []
+        for _, row in tqdm(df.iterrows(), total=len(df), desc="Iniezione"):
+            d_emb = model.encode(str(row.get('description', '')), convert_to_tensor=True)
+            main_inst = all_c[util.cos_sim(d_emb, c_embs)[0].argmax()](clean_iri(row['slug']))
 
-                
-                if matched_class is None and desc and fuzz:
-                    fuzzy_results = fuzzy_match(desc, class_reprs, topn=MAX_SUGGESTIONS)
-                    topf_cls, topf_score, topf_repr = fuzzy_results[0]
-                    if topf_score >= FUZZY_THRESHOLD:
-                        matched_method = "fuzzy"
-                        matched_class = topf_cls
-                        matched_score = topf_score / 100.0
-                        matched_repr = topf_repr
-                    else:
-                        top_suggestions_fuzzy = fuzzy_results
-                else:
-                    top_suggestions_fuzzy = []
+            for col, val in row.items():
+                if col == 'slug' or pd.isna(val): continue
+                col_emb = model.encode(str(col), convert_to_tensor=True)
+                val_str = str(val)
+                is_year = bool(re.fullmatch(r'\d{4}', val_str))
 
-                
-                if matched_class is None and desc:
-                    for token in set(desc_lower.split()):
-                        for c_obj, reprs in class_reprs:
-                            for r in reprs:
-                                if token in r.lower().split():
-                                    matched_method = "lexical_token"
-                                    matched_class = c_obj
-                                    matched_score = 0.0
-                                    matched_repr = r
-                                    break
-                            if matched_class:
-                                break
-                        if matched_class:
-                            break
-
-                
-                if matched_class is None:
-                    matched_method = "fallback_Thing"
-                    matched_class = Thing
-                    matched_score = 0.0
-                    matched_repr = "Thing"
-
-                
-                try:
-                    inst = matched_class(instance_name)
-                except Exception as e:
-                    print(f"ERRORE creazione istanza {instance_name} di {matched_class}: {e}")
-                    traceback.print_exc()
-                    continue
-
-                
-                for col in df.columns:
-                    col_norm = str(col).strip()
-                    if col_norm.lower() == "slug":
-                        continue
-                    prop_name = None
-                    if col_norm.lower() in PROPERTY_MAPPING and PROPERTY_MAPPING[col_norm.lower()]:
-                        prop_name = PROPERTY_MAPPING[col_norm.lower()]
-                        if not hasattr(inst, prop_name):
-                            sims = find_prop_by_similar_name(onto, prop_name)
-                            if sims:
-                                prop_name = sims[0]
-                    else:
-                        sims = find_prop_by_similar_name(onto, col_norm)
-                        prop_name = sims[0] if sims else None
-
-                    if not prop_name:
-                        continue
-
+                if is_year and prop_year:
                     try:
-                        val = row.get(col)
+                        f_val = adapt_value(prop_year, val)
+                        if hasattr(main_inst, prop_year.python_name):
+                            attr = getattr(main_inst, prop_year.python_name)
+                            if isinstance(attr, list): attr.append(f_val)
+                            else: setattr(main_inst, prop_year.python_name, f_val)
+                        continue
+                    except: pass
 
-                        if pd.isna(val) or val is None:
-                          setattr(inst, prop_name, [])
-                        else:
-                           
-                           if prop_name in ["hasYear", "hasMonth"]:
-                             try:
-                                v_to_set = int(val)
-                             except:
-                                v_to_set = None
-                           elif prop_name == "hasEventDate":
-                               
-                               if isinstance(val, pd.Timestamp):
-                                  v_to_set = val.to_pydatetime()
-                               elif isinstance(val, datetime):
-                                  v_to_set = val
-                               else:
-                                  v_to_set = pd.to_datetime(val).to_pydatetime()
-                           elif prop_name == "hasAuthentication":
-                              v_to_set = bool(val)
-                           elif prop_name in ["hasSourceURL", "hasEmail"]:
-                              v_to_set = str(val)  
-                           else:
-                              v_to_set = str(val)  
+                o_sims = util.cos_sim(col_emb, o_embs)[0]
+                if o_sims.max() > 0.25:
+                    op = obj_p[o_sims.argmax()]
+                    if op.name == "hasCampaign" and "country" in col.lower(): continue
+                    if op.name == "hasIncident" and is_year: continue
 
-                           
-                           if v_to_set is None:
-                              setattr(inst, prop_name, [])
-                           else:
-                              setattr(inst, prop_name, [v_to_set])
+                    if is_valid_val(op.name, val):
+                        try:
+                            t_cls = op.range[0] if op.range and isinstance(op.range[0], (type, ClassConstruct)) else Thing
+                            t_node = t_cls(clean_iri(val))
+                            getattr(main_inst, op.python_name).append(t_node)
+                        except: pass
 
-                    except Exception as e:
-                        print(f"ATTENZIONE: non posso assegnare '{prop_name}' a {instance_name}: {e}")
+                d_sims = util.cos_sim(col_emb, d_embs)[0]
+                if d_sims.max() > 0.25:
+                    dp = dat_p[d_sims.argmax()]
+                    if dp.name == "hasIncident" and is_year: continue
+                    if dp.name == "hasYear": continue 
 
-                report.append({
-                    "row_index": idx,
-                    "instance_name": instance_name,
-                    "description_snippet": desc[:200],
-                    "matched_method": matched_method,
-                    "matched_class": getattr(matched_class, "name", str(matched_class)),
-                    "matched_score": matched_score,
-                    "matched_repr": matched_repr,
-                })
+                    if is_valid_val(dp.name, val):
+                        try:
+                            f_val = adapt_value(dp, val)
+                            attr = getattr(main_inst, dp.python_name)
+                            if isinstance(attr, list): attr.append(f_val)
+                            else: setattr(main_inst, dp.python_name, f_val)
+                        except: pass
 
-                print(f"[{idx}] {instance_name} -> {getattr(matched_class,'name',str(matched_class))} ({matched_method}, score={matched_score})")
-
-            except Exception as e:
-                print(f"ERRORE riga {idx}: {e}")
-                traceback.print_exc()
-                continue
-
-       try:
-        onto.save(file=OUTPUT_OWL, format="rdfxml")
-        print(f"\nOntologia salvata in: {OUTPUT_OWL}")
-    except Exception as e:
-        print("ERRORE salvataggio ontologia:", e)
-
-    # report CSV
-    try:
-        pd.DataFrame(report).to_csv(REPORT_CSV, index=False)
-        print(f"Report mapping salvato in: {REPORT_CSV}")
-    except Exception as e:
-        print("ERRORE salvataggio report:", e)
-
-    print("Fine script.")
+    onto.save("FINALONTO.owl")
 
 if __name__ == "__main__":
-    main()
+    run_validated_injection()
+
+# Si raccordano le analisi precedenti all'iniezione. Si utilizza il file Excel come input. 
+# Si opera sull'ontologia UCO tramite Owlready2mentre si calcolano gli embedding delle proprietà ontologiche. 
+# Si applica la similarità del coseno semantica, il modello all-mpnet-base-v2 garantisce alta precisione. 
+# Si imposta una soglia minima di 0.25. Sotto questa soglia, i mapping vengono scartati.
+# Si filtrano manualmente i falsi positivi semantici. Si forza l'anno tramite regex a 4 cifre.
