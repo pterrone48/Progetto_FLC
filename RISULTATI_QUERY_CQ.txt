@@ -1,0 +1,1483 @@
+COMPETENCY QUESTIONS REPORT
+Timestamp: 2026-02-20 16:52:25
+
+QUERY: 1. Estrazione base Incidenti-Date-Attori
+incidente | data | attore
+008a59674de43150 | 2014-05-02T00:00:00 | None
+05eb17480d1a9a08 | 2014-05-02T00:00:00 | None
+5fc1396786dea62a | 2014-05-02T00:00:00 | None
+02bbc332422baf37 | 2014-03-21T00:00:00 | None
+bf894d48500a8941 | 2014-03-21T00:00:00 | None
+d8788a0c6236ce7f | 2014-03-21T00:00:00 | None
+fac1a37b1776545f | 2014-03-21T00:00:00 | None
+0300580af5e9ab8b | 2014-06-18T00:00:00 | None
+7cad5a23688bdd6b | 2014-06-18T00:00:00 | None
+aa85981a4d7bbc18 | 2014-06-18T00:00:00 | None
+ed5e5f966100f1b0 | 2014-06-18T00:00:00 | None
+03a2f82efbca7bd8 | 2014-06-30T00:00:00 | None
+51de7a6f8a84858e | 2014-06-30T00:00:00 | None
+8c5e7bc0c84cdffb | 2014-06-30T00:00:00 | None
+040a55840f4107f1 | 2014-04-30T00:00:00 | None
+52017707785c4332 | 2014-04-30T00:00:00 | None
+c99b46869dba53a6 | 2014-04-30T00:00:00 | None
+ecf4db82d4d397ba | 2014-04-30T00:00:00 | None
+04574788ee636fe5 | 2014-03-18T00:00:00 | None
+3c1af0769c4486a4 | 2014-03-18T00:00:00 | None
+b4125a3225e0f7aa | 2014-03-18T00:00:00 | None
+cf9bdc065210e3c3 | 2014-03-18T00:00:00 | None
+e6f10ce74cec9dca | 2014-03-18T00:00:00 | None
+047a31dcdf071666 | 2014-03-05T00:00:00 | None
+57e9e8ab5fcd632e | 2014-03-05T00:00:00 | None
+
+--------------------------------------------------
+
+QUERY: 2. Analisi quantitativa per Attore
+attore | numeroAttacchi
+
+--------------------------------------------------
+
+QUERY: 3. Correlazione Tipo-Data
+incidente | tipoEvento | data
+008a59674de43150 | Disruptive | 2014-05-02T00:00:00
+05eb17480d1a9a08 | Disruptive | 2014-05-02T00:00:00
+5fc1396786dea62a | Exploitive | 2014-05-02T00:00:00
+02bbc332422baf37 | Disruptive | 2014-03-21T00:00:00
+bf894d48500a8941 | Disruptive | 2014-03-21T00:00:00
+d8788a0c6236ce7f | Exploitive | 2014-03-21T00:00:00
+fac1a37b1776545f | Exploitive | 2014-03-21T00:00:00
+0300580af5e9ab8b | Disruptive | 2014-06-18T00:00:00
+7cad5a23688bdd6b | Disruptive | 2014-06-18T00:00:00
+aa85981a4d7bbc18 | Exploitive | 2014-06-18T00:00:00
+ed5e5f966100f1b0 | Disruptive | 2014-06-18T00:00:00
+03a2f82efbca7bd8 | Exploitive | 2014-06-30T00:00:00
+51de7a6f8a84858e | Disruptive | 2014-06-30T00:00:00
+8c5e7bc0c84cdffb | Disruptive | 2014-06-30T00:00:00
+040a55840f4107f1 | Disruptive | 2014-04-30T00:00:00
+52017707785c4332 | Disruptive | 2014-04-30T00:00:00
+c99b46869dba53a6 | Exploitive | 2014-04-30T00:00:00
+ecf4db82d4d397ba | Exploitive | 2014-04-30T00:00:00
+04574788ee636fe5 | Disruptive | 2014-03-18T00:00:00
+3c1af0769c4486a4 | Exploitive | 2014-03-18T00:00:00
+
+--------------------------------------------------
+
+QUERY: 4. Mapping Organizzazione-Industria
+organizzazione | industria | incidente
+British National Party | Other Services (except Public Administration) | 008a59674de43150
+Church of Cyprus | Other Services (except Public Administration) | 047a31dcdf071666
+Bihar Bharatiya Janata Party | Other Services (except Public Administration) | 06470105603e5210
+McKayla Maroney | Other Services (except Public Administration) | 0851399a0462bcb5
+helpmaidan.org.ua | Other Services (except Public Administration) | 09c78aef49c8957f
+British Academy of Film and Television Arts | Other Services (except Public Administration) | 09f38af706e7beda
+40dni.sk | Other Services (except Public Administration) | 0c6e7d31b84f3096
+Youth for Achievements | Other Services (except Public Administration) | 117f86828012d22d
+ReadingRockets.org | Other Services (except Public Administration) | 182e9d15c3d5da2c
+Carlo Ancelotti | Other Services (except Public Administration) | 2aa2ef042460fbba
+National-Socialist Party of Canada | Other Services (except Public Administration) | 2cdbdec039b5cc2f
+Chicago Yacht Club | Other Services (except Public Administration) | 319dbf1330b8c584
+Service Coordination Inc. | Other Services (except Public Administration) | 3c1af0769c4486a4
+Ankara Chamber of Industry | Other Services (except Public Administration) | 3c2e79c06c62e0d2
+Splash Car Wash | Other Services (except Public Administration) | 3c64ae43d699f949
+Earth Hour Philippines | Other Services (except Public Administration) | 3c780e8ebc839c4c
+Frankie Grande | Other Services (except Public Administration) | 3f5470f7089fff57
+International Civil Aviation Organization | Other Services (except Public Administration) | 4244201130175adb
+Broadcasthe.net | Other Services (except Public Administration) | 4368740142d043a7
+United Socialist Party of Venezuela | Other Services (except Public Administration) | 458c35d71fcb8103
+maidansupport.com | Other Services (except Public Administration) | 4bdd8d3d458f2cba
+Kate Upton | Other Services (except Public Administration) | 5121a023efc8f42f
+Kali | Other Services (except Public Administration) | 52017707785c4332
+Lutheran Church of Australia | Other Services (except Public Administration) | 5c829742c764b6b1
+antiwar.com | Other Services (except Public Administration) | 5f1e2354e7fe1af1
+Tehreek e Taliban Pakistan | Other Services (except Public Administration) | 6578f5505982bc5b
+Syrian National Coalition | Other Services (except Public Administration) | 68e43bad75b31bbb
+College of Physicians and Surgeons | Other Services (except Public Administration) | 70ab6b62895b12f7
+Gary Barlow | Other Services (except Public Administration) | 737e2414b0083541
+What.cd | Other Services (except Public Administration) | 8088a15c8ed5acc4
+MyCause | Other Services (except Public Administration) | 8139a43a3fc3b8c5
+World Wildlife Fund | Other Services (except Public Administration) | 875679a1722c2e9a
+City To Bay Fun Run | Other Services (except Public Administration) | 88a3d8cdbc615f63
+Jennifer Lawrence | Other Services (except Public Administration) | 8b33e3ead069dcef
+Lal Krishna Advani website | Other Services (except Public Administration) | 8bedaf7c6e7ba249
+Tails OS | Other Services (except Public Administration) | 8c5e7bc0c84cdffb
+Silk Road | Other Services (except Public Administration) | 8da805adac3625b4
+openSUSE | Other Services (except Public Administration) | 91ca868cca9622df
+PassthePopcorn.me | Other Services (except Public Administration) | 9690e16247e03209
+American Institutes for Research | Other Services (except Public Administration) | 9f51184a30058d54
+Griminal | Other Services (except Public Administration) | 9fee96668b8df8d4
+Jean-Jacques Quisquater | Other Services (except Public Administration) | b047f3f91273a486
+Anonymous | Other Services (except Public Administration) | b795c71a1cbaeef4
+Wide Area and Sensing Conference | Other Services (except Public Administration) | b8e2bed468676dbe
+Plenty of Fish | Other Services (except Public Administration) | bcd44ee9b24bd5e5
+Lea Michele | Other Services (except Public Administration) | bf7a5794590c1c93
+Victoria Justice | Other Services (except Public Administration) | c429dc53aa3f2666
+maidanhelp.com.ua | Other Services (except Public Administration) | c4f6dab8ebb6ec32
+Sir Ian Botham | Other Services (except Public Administration) | c4fedc39baa29d5c
+Association of Corporate Travel Executives | Other Services (except Public Administration) | c5aaa8fc99dc5b4c
+Church of Scotland | Other Services (except Public Administration) | d12cbaf0d238a273
+Directors Guild of Canada | Other Services (except Public Administration) | d13fc3247f4cdf73
+Ukranian Democratic Alliance for Reform | Other Services (except Public Administration) | d4c120063cf54f2d
+qha.com.ua | Other Services (except Public Administration) | d56625d63ccc4422
+Denmark's Socialist Party | Other Services (except Public Administration) | da4e8c0884a40d39
+Denmark\'s Socialist Party | Other Services (except Public Administration) | da4e8c0884a40d39
+RSA | Other Services (except Public Administration) | dea760c72ded238d
+Jon "Bones" Jones | Other Services (except Public Administration) | df89a9e5cf4b85f3
+Jon \"Bones\" Jones | Other Services (except Public Administration) | df89a9e5cf4b85f3
+Kickstarter | Other Services (except Public Administration) | e14b207a68308488
+Syrian Electronic Army | Other Services (except Public Administration) | e14d6a563ca50169
+popvote.hk | Other Services (except Public Administration) | e1ef76e81baabadc
+Cryptome | Other Services (except Public Administration) | e27b9f14fb1b92b4
+Ariana Grande | Other Services (except Public Administration) | e5e9ecc17bde32fa
+banderivets.org.ua | Other Services (except Public Administration) | eabaccfd9f403ba5
+Kirsten Dunst | Other Services (except Public Administration) | ee967f9412893ca3
+Perl Blogs | Other Services (except Public Administration) | f4c56847ff5ae76a
+Veterans of Foreign Wars | Other Services (except Public Administration) | f527b22e9a675cbf
+Hootsuite | Professional, Scientific, and Technical Services | 02bbc332422baf37
+UltraDNS | Professional, Scientific, and Technical Services | 040a55840f4107f1
+ESET | Professional, Scientific, and Technical Services | 08c366124c18b433
+Tajikistan Domain Registrar | Professional, Scientific, and Technical Services | 1a8bd2d4c07d213c
+Skype's Social Media | Professional, Scientific, and Technical Services | 3bbe0695e2d019f3
+Skype\'s Social Media | Professional, Scientific, and Technical Services | 3bbe0695e2d019f3
+ESET's Spain domain | Professional, Scientific, and Technical Services | 41d42065a1707115
+ESET\'s Spain domain | Professional, Scientific, and Technical Services | 41d42065a1707115
+ESET Security Forum | Professional, Scientific, and Technical Services | 43ed355793dfc2cd
+Spirol International | Professional, Scientific, and Technical Services | 6356ff181a67721c
+Mad Mimi | Professional, Scientific, and Technical Services | 711bfe3d86e81232
+Naver | Professional, Scientific, and Technical Services | 7413d4d78b4c882b
+Certification ESET Spain | Professional, Scientific, and Technical Services | 7855bd0f8be0d51d
+Network Information Center of Paraguay | Professional, Scientific, and Technical Services | 7c95df2405dcd262
+Meteo France (meteofrance.com) | Professional, Scientific, and Technical Services | 81db842bdfff3a3d
+ESET | Professional, Scientific, and Technical Services | 8ed342609ea7a521
+Paytime Inc. | Professional, Scientific, and Technical Services | 93e7c1168c223ea1
+Indexeus.org | Professional, Scientific, and Technical Services | 954331b872c08116
+Deltek | Professional, Scientific, and Technical Services | 9894cecb8a120c7c
+AECOM | Professional, Scientific, and Technical Services | b343e33bb2bc6944
+Avast | Professional, Scientific, and Technical Services | b405b57184b1ad91
+Createthe Group | Professional, Scientific, and Technical Services | c51b0477cc49a421
+Point DNS | Professional, Scientific, and Technical Services | c8d7bf3a0f0a0d86
+BigBoss repository | Professional, Scientific, and Technical Services | df270e1ea62b9d38
+Ground(ctrl) | Professional, Scientific, and Technical Services | e2fa420876baaf3c
+Basecamp | Professional, Scientific, and Technical Services | e79fbdd8a7c2653e
+Record Assist LLC | Professional, Scientific, and Technical Services | ecac8b3e60a2f72f
+domain.me | Professional, Scientific, and Technical Services | f5dab08ea70d10d7
+Move, Inc. | Real Estate and Rental and Leasing | 0300580af5e9ab8b
+JCM Partners | Real Estate and Rental and Leasing | 833863509c7bc8c9
+Butler University | Educational Services | 03a2f82efbca7bd8
+Iowa State University | Educational Services | 0515d0acb723dc43
+Dr. Micharl M. Krop Senior High School | Educational Services | 05eb17480d1a9a08
+Kansas Interactive Testing Engine | Educational Services | 144f78e0a07b547e
+University of Louisiana at Monroe | Educational Services | 17de741fd81a0adf
+Massachusetts Institute of Technology | Educational Services | 1cdda8608d81b16d
+Barry University | Educational Services | 1f72c2eb8ab303e4
+University of Wisconsin Parkside | Educational Services | 208229ac32164cbc
+Arkansas State University | Educational Services | 29de69aee2862f57
+University of West Florida | Educational Services | 2c993f8fe38d8ffa
+California State University | Educational Services | 2d56fed299b962b7
+INVALSI | Educational Services | 34e34c61cf03b1e7
+University of Virginia | Educational Services | 3b7ef47d630ccbc4
+Stanford University | Educational Services | 4b3a4d10393d9068
+Artsakh State University | Educational Services | 51d2d381b04a8917
+University of Maryland, College Park | Educational Services | 55036966af31ae1a
+University of North Carolina Wilmington | Educational Services | 5fc1396786dea62a
+St. Aldhelm's Academy | Educational Services | 62efcc269f5ff3e7
+St. Aldhelm\'s Academy | Educational Services | 62efcc269f5ff3e7
+Penn State College of Medicine | Educational Services | 7238ce487b748e04
+College in Shanghai's Songjiang District | Educational Services | 7fca8172c231dae6
+College in Shanghai\'s Songjiang District | Educational Services | 7fca8172c231dae6
+Cumberland Valley School District | Educational Services | a83a8f3c6cc9a062
+University of California Washington Center | Educational Services | b00ee88a9d2ab933
+Texas State Technical College | Educational Services | b25d0d72570f0acf
+University of California Irvine | Educational Services | b4db6816b51b584d
+University of Maryland, College Park | Educational Services | b9bbdafe64918a57
+Ateneo Integrated Student Information System | Educational Services | bc93c9a68d1edd73
+University of Nebraska Omaha | Educational Services | cb17a7bb2c3a2289
+International Council of E-Commerce Consultants | Educational Services | cd6eb42011163bae
+Auburn University | Educational Services | fac1a37b1776545f
+knowledgeicon.com | Educational Services | fd80685909d97d48
+Chevrolet | Manufacturing | 04574788ee636fe5
+Lockheed Martin | Manufacturing | 0d5eda48eee60e38
+Score | Manufacturing | 1aa3a134e8a1f32b
+Boeing | Manufacturing | 30cafd89b274c88a
+Medtronic | Manufacturing | 35f1da5548e66e4c
+Plexor | Manufacturing | 6dc4c9822a775d59
+Boston Scientific | Manufacturing | 8b2976020b51ab00
+Automatic Systems | Manufacturing | 8d8a2781d0c92842
+Conforama | Manufacturing | a64114296e418e05
+Toyota (Guatemala) | Manufacturing | b4125a3225e0f7aa
+Easton-Bell Sports | Manufacturing | c8482e2d2216d7a4
+Edgepark Medical Supplies | Manufacturing | d7aef044f381fb27
+Renault | Manufacturing | e6f10ce74cec9dca
+Tata Motors | Manufacturing | f0447ca8970e5037
+Boxee.tv | Information | 0483005f1ecd785e
+The Straight Dope | Information | 05b062e6e3d67e7e
+Grinding Gear Games | Information | 0d8abd5482fddce6
+MMMOOO | Information | 0e75f5a77fe02e43
+WooThemes | Information | 107431fe0d8096f1
+The Wall Street Journal | Information | 10a3a6b6de2052c6
+Dota 2 | Information | 128ad0dc650499fa
+World of Tanks | Information | 1389e2776dea37ba
+Spotify | Information | 1553addc450ba801
+Evernote | Information | 179305debc36f399
+Xbox Instagram account | Information | 17bbee8b997fe0fc
+Supercell Facebook Pages | Information | 1cfb8a5395419562
+CNN | Information | 1ec2f777aa22c77f
+Bharat Sanchar Nigam Limited (BSNL) | Information | 2398447c7480cffd
+Klas Telecom | Information | 2772c86463348aa7
+Turkcell | Information | 27d292a336279ebe
+eyeofdubai.ae | Information | 2ebb3f8bf502a2a5
+Mercantile Communications Pvt | Information | 33360a84f1d88f08
+Battle.net | Information | 3a94b8cf6dde1f66
+comicbookdb.com | Information | 3aab5fad206b01aa
+Evernote | Information | 3d0eaaac8d1d0128
+ARY News | Information | 3ee3df51e535a80c
+Synology NAS Boxes | Information | 423b7ea3a2ac3396
+Alikhbaria | Information | 49f1240bd478eda3
+Feedly | Information | 4e716ff4458c6f9e
+Israeli Channel 10 | Information | 529074d2ef362542
+Wurm Online | Information | 5c9605b9d2d392e4
+Gamma Group | Information | 5dd3ed696f89008a
+League of Legends | Information | 5e60d304e9a1ba74
+Alaska Communications | Information | 60671f83d08c5e2b
+Snapchat | Information | 6100014f6ca84b3d
+Undisclosed industrial software company | Information | 6b0796917dcb27b0
+MarkMonitor | Information | 6e4e1298ceb177af
+Club Penguin | Information | 6eb9381090e64eb5
+Typepad | Information | 711c06638a817365
+Sorenson Communications | Information | 728947be50991bce
+iiNet | Information | 742737e0be789cf1
+Israel Defense | Information | 78ebedfc85a6a17c
+EA.com | Information | 79fa7d3ff14f2e1c
+CNET | Information | 7a09cc87eb4b9ef7
+Code Spaces | Information | 7cad5a23688bdd6b
+Cemig Telecom | Information | 807af42881024f01
+Cerberus | Information | 81761c586d02db79
+AOL Mail | Information | 820dcd35acd7671b
+Origin | Information | 8815d521bdcf7a52
+Rescator | Information | 89b68278558ec42e
+job.sy | Information | 8c470e2bb164beef
+Haaretz | Information | 8cc4224d934612ba
+Rovio | Information | 8fd5c6b5eda44cdc
+realestate.sy | Information | 942b4e4597df6ab9
+PayPal | Information | 9552aa314bd1f0dd
+Bell Canada | Information | 98f2fe654de002e9
+Vodafone | Information | 99394c91e7407901
+Steam | Information | 9fb05008cd7721e7
+Metro newspaper | Information | a1b97d47c1d59772
+Cirrus Communications | Information | a560f11dba4b509d
+Muslim Directory | Information | a5790cecc85ca6fb
+mumsnet | Information | a7434ec0a8eac864
+Bharat Sanchar Nigam Limited (BSNL) | Information | ab2a62f4d730c092
+Sky News Egypt | Information | accf9ccbc6287d66
+AVS TV | Information | af52b35159acfa04
+Telenor | Information | b0fd742860464bfc
+TTNET | Information | b1c433e3938c5448
+Comcast | Information | b22907325a028aa4
+Moz | Information | b295628dc1eaf4e2
+Namecheap | Information | b603de25ad5faf51
+Forbes | Information | b6b2ef63fdd9792a
+Xbox Live | Information | b6b349b04a7808e7
+Undisclosed video game company | Information | b8651d4d3c681206
+AT&T | Information | b91c4a13d00bc120
+hackforums.net | Information | be5a11dd6c0c6c8a
+ThrustVPS | Information | bf0344b8c02f9b4f
+GitHub | Information | bf894d48500a8941
+World of Warcraft | Information | c37fffe9643c0807
+EA | Information | c957fdb1f218503e
+Eircom | Information | c99b46869dba53a6
+Geekface | Information | ca3cd0e791329f22
+Microsoft News | Information | cab43d956a13da96
+The Wall Street Journal | Information | cc9e02f56e0c737b
+GitHub | Information | ce0f0eaf7166dfcb
+JSTOR | Information | cfef06ecdbe14973
+Ubuntu | Information | d118e152e28e352c
+Twitter | Information | d22c983540651bce
+AlfaNet | Information | d861834f7fe628e6
+Battle.net | Information | da629c485fbd050c
+AVG | Information | e1dd81da1f6d3a67
+Sony PlayStation Network | Information | e4a27262c4edef6f
+PTV Sports | Information | e7f89b6053c0c57a
+Al Arabiya | Information | e8b2c0cd174903a6
+4chan | Information | ecf4db82d4d397ba
+baltimorejewishlife.com | Information | eefbbb48cfc4a3b0
+MeetMe | Information | f296db6a1b32cbb3
+tutorialized.com | Information | f307b97dea0cf436
+Xbox Twitter account | Information | f50cd73302ca6b17
+Cloudflare | Information | f5e72d0274452379
+OmegaNet | Information | f637d734ed6b7016
+askmen.com | Information | f6e7cbfb539e98b7
+Turkcell | Information | fe7b2fd7c4b09e8f
+Armenian President Website | Public Administration | 05a2251c85707580
+Belgian Foreign Ministry | Public Administration | 05e203d87f5a086a
+National Informatics Center | Public Administration | 06131416eaf6fa1d
+Gas Distribution Authority of Sakarya | Public Administration | 075e48641f9fa231
+Mossad | Public Administration | 07b2cbeeecd4e11b
+Ministry of Health | Public Administration | 07e56a3d9e72e35d
+Israel Defense Forces | Public Administration | 0991398a506e7029
+Malaysian Department of Civil Aviation | Public Administration | 09f06060c9ba0953
+Turkish Ministry of Education | Public Administration | 0a4b8ccabede4b76
+Delaware Treasury Division | Public Administration | 0c416574a35168f6
+City of Amasya | Public Administration | 0f314709f6a68656
+Dubai Police | Public Administration | 1125c775c8edb7a9
+Pakistan Ministry of Interior | Public Administration | 11a7a57a6b720a04
+European Court of Human Rights | Public Administration | 130bcd90d01c4db1
+Riyadh Principality | Public Administration | 15990c26ce209558
+FBI Fusion Center | Public Administration | 1610f97a3c61fb74
+Malaysian National Security Council | Public Administration | 176c1534ac14be4c
+California Department of Motor Vehicles | Public Administration | 1bbd24ee070300b7
+Dnipropetrovsk Department of Law Enforcement | Public Administration | 1f971bf819389290
+Various Government Websites | Public Administration | 204844c1e51a4fef
+Pakistani Consulate in Jeddah | Public Administration | 22cf2b8d844b227b
+Various Government Websites | Public Administration | 2517894581706036
+Office of Personnel Management | Public Administration | 2813f649130ee3ac
+Kars Municipality | Public Administration | 2a4df0d477113349
+Connecticut State Government website | Public Administration | 2b1f119a58e8d733
+Sao Paulo State Government | Public Administration | 2be7d3b46defe772
+General Directorate of the EGO | Public Administration | 2c470e54622da9a6
+Pakistan Official Portal | Public Administration | 2db7da5170ced481
+West Bengal Public Health Engineering Department | Public Administration | 3722459375612f98
+Ministry of Education of Armenia | Public Administration | 37e75f22d0e75f4d
+Ferguson Police | Public Administration | 38bc58f9ce5dd886
+Directorate General Public Relations, Government of the Punjab | Public Administration | 3a52161e35a08ea0
+Rumah Principality | Public Administration | 3bbaff69a61c8a44
+Ukrainian Election Commission | Public Administration | 3e8e90dd39c1951a
+Alduwadimi Principality | Public Administration | 416754517c51bb5f
+Cabinet Ministry of Pakistan | Public Administration | 451a1317b33e6874
+Department of Agriculture | Public Administration | 459733780ce77e35
+Bangalore City Police | Public Administration | 459a5d1860e1c7b3
+Huraymila Principality | Public Administration | 467a1b3ddb73cd29
+National Portal of India | Public Administration | 49aab2197cbb5f4a
+Alquwayiyah Principality | Public Administration | 4df21ba269bb4fc9
+Alohtah Principality | Public Administration | 4fe7dcb63e455044
+Various Government Websites | Public Administration | 52572d7717648805
+Finnish Foreign Ministry | Public Administration | 5b7908d285d2c28a
+Federal Customs Service | Public Administration | 5d0b8cfe51f1ddb1
+Department of Homeland Securiety | Public Administration | 5ebd2458b3058bd8
+Various Government Websites | Public Administration | 5f3c348d571b34e1
+New Zealand National Institute of Water and Atmospheric Research | Public Administration | 5fd4e8683b3bdd28
+Pakistan Ministry of Railways | Public Administration | 604291100b416921
+Verkhovna Rada | Public Administration | 60704a5fc16599ff
+Ministry of Defense of Pakistan | Public Administration | 60c43b8ef0ed4910
+Thadiq Principality | Public Administration | 62acc1ac6e80b728
+SingPass | Public Administration | 63c4e9367f748f5a
+Nuclear Regulatory Commission | Public Administration | 6576adad6cf8d94d
+Aldoriyah Principality | Public Administration | 6645aca76cb83649
+Office of the Prime Minister of Ukraine | Public Administration | 6b436012b5b5f504
+Israel Defense Forces | Public Administration | 6c4748e621f40786
+Singapore government employees | Public Administration | 6c99ea3c0029707b
+Albuquerque Police Department | Public Administration | 6ca6cf75d44b6e3c
+Parkistan Army | Public Administration | 6eaa8cb6b6dc0194
+New York Board of Elections | Public Administration | 6f7ef6029ac453f3
+Soma Municipality | Public Administration | 7136e63237294f84
+Fullerton Police Department | Public Administration | 71b7a8ae5b5e9f5f
+Official website of the President of Nepal | Public Administration | 71cacdfcb6ddb007
+Office of the Israeli Prime Minister | Public Administration | 7331c6ab27af2274
+Taj Mahal Website | Public Administration | 7743a213eda9c933
+Embassy of India in Russia | Public Administration | 7840d49c33002279
+Bangladesh Airport Armed Police | Public Administration | 7885f9b77bdb9cad
+Kenyan Defence Forces | Public Administration | 7b47d05fbd4c26be
+Alshariq Principality | Public Administration | 7c56c469593d3f7f
+Pakistan National Portal | Public Administration | 7e2ce295cdd16184
+Department of Culture, Media and Sport | Public Administration | 7e5ed3f76a70db21
+PharmaNet | Public Administration | 7f01a9f94efc2ac1
+Israeli Embassy for Uzbekistan | Public Administration | 7f0eabc1a027d85d
+Website of the Israeli Prime Minister | Public Administration | 7f43e545442f6c21
+US Army | Public Administration | 7f5afa38d82f70c7
+Ohio State Government | Public Administration | 816c06f1ff88dd3d
+Rafael Correa Twitter account | Public Administration | 82441a9022b3c9aa
+City of Dubois, PA | Public Administration | 827ad935929a2f43
+Armed Forces Training Authority | Public Administration | 82ff7daa6aa16324
+Brazilian Ministry of External Relations | Public Administration | 854b72adac34d215
+Ministry of Communications and Information Technology | Public Administration | 85c4cfe046eddc9b
+Pakistan Manpower Institute | Public Administration | 876e3228d05fbb5b
+Various Government Websites | Public Administration | 884bf33a3f048833
+St. Louis County Police | Public Administration | 88ed4446a07f9b14
+Justice Minister Judith Collins | Public Administration | 8f57b0566dda7c77
+Riyadh Principality magazine website | Public Administration | 967c92f836e90630
+Various Government Websites | Public Administration | 96958edb3e49bff8
+United Nations Integrated Civil Society Organizations System | Public Administration | 9d5164978e1a86fc
+Website of the Connecticut Governor | Public Administration | 9f3ca4c32b7ef821
+United Nations Internet Governance Forum | Public Administration | a4ffcbbf008aa8cc
+UK Government Communications Headquarters | Public Administration | a72bd03b0b4cc9c9
+Government Secure Intranet | Public Administration | aa85981a4d7bbc18
+Namibian Government Portal | Public Administration | ac8309343d1619dd
+French Ministry of Interior | Public Administration | aecb46587decde3b
+Various Government Websites | Public Administration | b1a2323cb0b5c776
+Russian Industrial Investment Fund | Public Administration | b343d7f2a4a12bd7
+Pakistan Meteorological Department | Public Administration | b3a12359b1b6b620
+Hillary Clinton | Public Administration | bab9b5a1929df267
+Julie Bishop | Public Administration | bc998b6181a5a4aa
+Government of Punjab | Public Administration | befaf7e40d1f2739
+Malaysian Ministry of Education | Public Administration | bf7a7af20eeb296e
+Official Portal for Manila, Philippines | Public Administration | bf93033148a466cb
+Almajmah Principality | Public Administration | c01bf67caadc98c5
+French Ministry of Defense | Public Administration | c2c6fd0f4210203f
+Dmitry Medvedev Twitter account | Public Administration | c36d9c3c05911a6f
+Governor of Arizona | Public Administration | c61174dd489cc0a0
+UK Ministry of Justice | Public Administration | c6a598af627071a9
+Pakistan Government Establishment Division | Public Administration | c9280c5eea13aecd
+Arizona Department of Homeland Security | Public Administration | c9c538ff6e0d9ec4
+US Federal Court System | Public Administration | cb9e113149a1f5a5
+City of Binghamton, NY | Public Administration | ccf12277d0d0f70e
+Julie Bishop | Public Administration | cf9bdc065210e3c3
+Alghat Principality | Public Administration | d14123039c06d0e5
+Ministry of Agriculture and Rural Development | Public Administration | d26c9076706c78bc
+Ministry of Natural Resource and Environment | Public Administration | d2a4094c00a7ef20
+Azad Kashmir Government Portal | Public Administration | d2dc2751775a2d31
+Presidential Adviser | Public Administration | d2f619a94e830f7a
+Various Government Websites | Public Administration | d3191453f656d736
+Regional Electoral Court of the Amazon | Public Administration | d37641a72e78562d
+Canada Revenue Agency | Public Administration | d59b542d7d6b6ad2
+Israeli Defense Contractors | Public Administration | d6006b80c46a43db
+United Nations Economic and Social Commission for Western Asia | Public Administration | d8bf66f42f0e5408
+US Embassy in Turkey | Public Administration | d92febef87134973
+Employees Old-Age Benefits Institution | Public Administration | db026d113e2f54cd
+Ministry of Police Affairs | Public Administration | dedcbf306174ff2d
+Telecommunications Directorate | Public Administration | e0e9cbcc6e4e0338
+Vice | Public Administration | e1d61101802c8490
+Egyptian Ministry of Information | Public Administration | e73bc26382a87068
+German Aerospace Centre | Public Administration | e80ba50c5d06dbf9
+Duruma Principality | Public Administration | e85eb01d25ac8a1b
+Rawalpindi Police | Public Administration | e93191f1884172cb
+Various Government Websites | Public Administration | ea06a6bae8f95b75
+Healthcare.gov | Public Administration | ec852d184a08d00e
+Official website of the President of Nepal | Public Administration | f05ee751e92fca2a
+Ministry of Interior | Public Administration | f05fdabbc145a290
+National Research Council | Public Administration | f0b469f82c97b607
+Montana Department of Public Health | Public Administration | f600c49ea323f9f0
+Shaqra Principality | Public Administration | fa5aad7d08e246ba
+Almuzamiyah Principality | Public Administration | fe0aa6473cf8e788
+Israeli Defense Ministry | Public Administration | feec950ff1c3416a
+Monju Nuclear Power Plant | Utilities | 06f1349d3738afcf
+Energie Steiermark | Utilities | 204e8439ddd8d2bc
+Dominion Resources | Utilities | 445496fa5419875f
+Centrais El tricas do Norte do Brasil | Utilities | 7e5bf588837171e7
+Pakistan Electric Power Company | Utilities | ada756fe094942ad
+British Gas | Utilities | e4e84bf7686b80f5
+DNB | Finance and Insurance | 0a28e8aee437968b
+PrezidentBank | Finance and Insurance | 36dd985b3af801b5
+Central Bank of Turkey | Finance and Insurance | 3ad9b96e2972e495
+Total Bank | Finance and Insurance | 422fe8b3adf7e8af
+Privatbank | Finance and Insurance | 51de7a6f8a84858e
+Bitstamp | Finance and Insurance | 51f8acaedf45bbd1
+Give Me Coins | Finance and Insurance | 5294ae50e79c6008
+CoinEX.pw | Finance and Insurance | 595d817ab9815f5d
+JPMorgan | Finance and Insurance | 5a1d936e8a52541e
+Mt. Gox | Finance and Insurance | 5c52b1665bc24233
+Turkmenbashi Bank | Finance and Insurance | 6cb1197f4099b27e
+Nordea | Finance and Insurance | 6e61c271c6adc1cd
+Bank of the West | Finance and Insurance | 843ea73e3231b2c8
+European Central Bank | Finance and Insurance | 8dc37e6b511ccd65
+Storebrand | Finance and Insurance | 8f80aa4966ec50e1
+Bank of Israel | Finance and Insurance | 9380971a23c1eefb
+Gjensidige | Finance and Insurance | 95967c2e3b6cff24
+Gateway Savings and Loans Limited | Finance and Insurance | 9c102687afe1efc9
+Sparebank 1 | Finance and Insurance | 9c2cfdbaaab73780
+Doge Vault | Finance and Insurance | a805b7b33ebbcc99
+Aktif Bank | Finance and Insurance | b5558f85db5ac5b9
+Staysure | Finance and Insurance | c62dded89628b0bf
+Bitstamp | Finance and Insurance | c654e4a02a860727
+Alipay | Finance and Insurance | cd362799eb135152
+Bank of Israel | Finance and Insurance | d0a6603ecb21da6f
+Financial Services Online | Finance and Insurance | df05de81c82f0f37
+Placemark Investments | Finance and Insurance | e937cb21fb0155f6
+Danske Bank | Finance and Insurance | f2019e8b2ba452f3
+Dairy Queen | Accommodation and Food Services | 113c6ad2b6e837b0
+Flight Centre Travel Group | Accommodation and Food Services | 2b47ee08e18be451
+Las Vegas Sands Corp | Accommodation and Food Services | 39c2b71d9b14c510
+Undisclosed number of Delaware restaurants | Accommodation and Food Services | 412a8a2674ae04a7
+El Agave Restaurant | Accommodation and Food Services | 50036e5047d8cf10
+The Houstonian Hotel | Accommodation and Food Services | 5e4a887e898ce76f
+Otto Pizza | Accommodation and Food Services | 8864253f4f7ccf42
+P. F. Chang's | Accommodation and Food Services | a59b5c2114cbd6d7
+P. F. Chang\'s | Accommodation and Food Services | a59b5c2114cbd6d7
+Bartell Hotels | Accommodation and Food Services | b3e92e921cb7d123
+Domino's Pizza | Accommodation and Food Services | c6828297bc9aac86
+Domino\'s Pizza | Accommodation and Food Services | c6828297bc9aac86
+Mizado Cocina | Accommodation and Food Services | ec0194f37b3bb202
+Sea Pines Resort | Accommodation and Food Services | edf47ba4edec10ef
+Carlson Rezidor Hotel Group | Accommodation and Food Services | f05bafeaee63a49c
+Rural King | Retail Trade | 13561e2a1bf0c3b4
+Supervalu | Retail Trade | 2cd3d7f92f0a23ef
+Office | Retail Trade | 3da288c7c840b9fc
+Spec's | Retail Trade | 3eecac2f298a7d91
+Spec\'s | Retail Trade | 3eecac2f298a7d91
+Autonation | Retail Trade | 5024c0539c5753d0
+TheNaturalOnline.com | Retail Trade | 5c50abbf0049bc8a
+Neiman Marcus | Retail Trade | 75461edd8a88b7e6
+Bulk Reef Supply | Retail Trade | 78011c7933b73974
+eBay | Retail Trade | 7ade9c019cd40d6d
+wirelessemporium.com | Retail Trade | 7babf58c07b56912
+eBay | Retail Trade | 817c6ca4b434c1ac
+Shelburne Country Store | Retail Trade | 97b63102fda86ab6
+Michael's | Retail Trade | a75bf7689c90c5d5
+Michael\'s | Retail Trade | a75bf7689c90c5d5
+Well.ca | Retail Trade | b1e0786613c7b8d7
+Dennis East International | Retail Trade | b58f2e718b212c97
+Vibram | Retail Trade | c0db6a0f40c603e4
+Rosenthal Wine Shop | Retail Trade | d8788a0c6236ce7f
+The Home Depot | Retail Trade | dae96c0c16442450
+Sheplers | Retail Trade | e788ffac009605ce
+ancestry.com | Retail Trade | ed5e5f966100f1b0
+Sears | Retail Trade | f12be8d6540a346e
+Power Equipment Direct | Retail Trade | f46392ca819868e4
+Froco Fresh Frozen | Wholesale Trade | 14dc84ca6a44c145
+Craftsman Book | Wholesale Trade | 37e96b8f0c2ce8ca
+ClamCase | Wholesale Trade | 5f94407e263536ab
+Lubbock Cardiology Clinic | Health Care and Social Assistance | 17f648b744da19a0
+Dartmouth-Hitchcock | Health Care and Social Assistance | 311eec3442f50041
+Harley Medical Group | Health Care and Social Assistance | 355d01e769b2ff87
+Children's Mercy Hospital | Health Care and Social Assistance | 4f99aa333554a365
+Children\'s Mercy Hospital | Health Care and Social Assistance | 4f99aa333554a365
+Valley View Hospital | Health Care and Social Assistance | 570212f0cab7b641
+Assisted Living Concepts | Health Care and Social Assistance | 57e9e8ab5fcd632e
+Kaiser Permanente | Health Care and Social Assistance | 8d8cbe0bab9ca4b7
+Community Health Systems | Health Care and Social Assistance | 9328f8f48140c588
+National Health Service | Health Care and Social Assistance | 97695ae691196d74
+St. Joseph Health System | Health Care and Social Assistance | a214f05c3e8bfa0a
+Boston Children's Hospital | Health Care and Social Assistance | aef80185757a2def
+Boston Children\'s Hospital | Health Care and Social Assistance | aef80185757a2def
+University of Pittsburgh Medical Center | Health Care and Social Assistance | e40d30ff13486ecd
+Onsite Health Diagnostics | Health Care and Social Assistance | e5cafdeec693027e
+DeKalb Health | Health Care and Social Assistance | f64ba2a469e60d5a
+Midwest Orthopaedics | Health Care and Social Assistance | f913a3c729d50c61
+Olmsted Medical Center | Health Care and Social Assistance | fbcef4ce517e64de
+Moshtix | Arts, Entertainment, and Recreation | 20028e4883d60f37
+Summit County Fair | Arts, Entertainment, and Recreation | 269bc8a1f79af806
+Houston Astros | Arts, Entertainment, and Recreation | 38c0c29902a3ed04
+Linkin Park | Arts, Entertainment, and Recreation | 4c3b1506a788132b
+Board of Control for Cricket in India | Arts, Entertainment, and Recreation | 5a8e31edabf1e03c
+Gingerbread Shed Corporation | Arts, Entertainment, and Recreation | 659dd8fd5348e70e
+Federal Police of Brazil | Arts, Entertainment, and Recreation | 798d243a0112e169
+Globo TV Brasil | Arts, Entertainment, and Recreation | af314d9c25919e49
+Undisclosed online gambling website | Arts, Entertainment, and Recreation | b685dac48a8057ae
+FC Barcelona | Arts, Entertainment, and Recreation | bd43b6f45f43e990
+Football Federation of Armenia | Arts, Entertainment, and Recreation | de3960af0f5a82aa
+Affinity Gaming | Arts, Entertainment, and Recreation | f111aef4ced111ad
+Reuters | Management of Companies and Enterprises | 2914364202f37762
+North East King County Regional Public Safety Communication Agency (NORCOM) | Administrative and Support and Waste Management and Remediation Services | 2bded7a6d5e7d6d4
+Metropolitan Companies, Inc. | Administrative and Support and Waste Management and Remediation Services | 5cc8c1294f98842e
+USIS | Administrative and Support and Waste Management and Remediation Services | 7d3649d43e6b1fd0
+BigMoneyJobs.com | Administrative and Support and Waste Management and Remediation Services | 7deb93a8ef656b50
+Experian | Administrative and Support and Waste Management and Remediation Services | 98504b09072946b3
+zerem.co.il | Administrative and Support and Waste Management and Remediation Services | d104b295d54b17a9
+Malaysia Airlines | Transportation and Warehousing | 364e2da514270f98
+Air France | Transportation and Warehousing | 7336d12d76042490
+Road sign in San Francisco | Transportation and Warehousing | 87cdff886d5d1031
+Indian Railways | Transportation and Warehousing | 9a375fe097db7bd9
+Corsica Ferries | Transportation and Warehousing | d9c35a1a5e460877
+Indian Ministry of Railways | Transportation and Warehousing | fd6e79daffb0b490
+Monsanto | Agriculture, Forestry, Fishing and Hunting | 746e282b187844b9
+Monsanto | Agriculture, Forestry, Fishing and Hunting | d65333c0fd8e5564
+Areva | Construction | 881facc26f63e238
+Rowan Companies | Mining, Quarrying, and Oil and Gas Extraction | 9b397716d1140be7
+
+--------------------------------------------------
+
+QUERY: 5. Classifica Settori per Volume
+industria | totale
+Public Administration | 141
+Information | 98
+Other Services (except Public Administration) | 66
+Educational Services | 30
+Finance and Insurance | 28
+Professional, Scientific, and Technical Services | 26
+Retail Trade | 22
+Health Care and Social Assistance | 16
+Manufacturing | 14
+Accommodation and Food Services | 13
+Arts, Entertainment, and Recreation | 12
+Utilities | 6
+Administrative and Support and Waste Management and Remediation Services | 6
+Transportation and Warehousing | 6
+Wholesale Trade | 3
+Real Estate and Rental and Leasing | 2
+Agriculture, Forestry, Fishing and Hunting | 2
+Management of Companies and Enterprises | 1
+Construction | 1
+Mining, Quarrying, and Oil and Gas Extraction | 1
+
+--------------------------------------------------
+
+QUERY: 6. Analisi Temporale post-2020
+incidente | data | tipo
+130bcd90d01c4db1 | 2020-12-22T00:00:00 | Disruptive
+a64114296e418e05 | 2022-11-11T00:00:00 | Mixed
+8d8a2781d0c92842 | 2023-06-03T00:00:00 | Mixed
+d9c35a1a5e460877 | 2023-11-07T00:00:00 | Mixed
+
+--------------------------------------------------
+
+QUERY: 7. Analisi Cross-Relazionale (Campagna-Vittima-Tipo)
+Nessun dato rilevato
+
+--------------------------------------------------
+
+QUERY: 8. Identificazione di Nuove Classi (Evoluzione TBox)
+nuovaClasse | superClasse
+AtError | LogicExploit
+ExceptionCondition | LogicExploit
+RaceCondition | LogicExploit
+SerialError | LogicExploit
+BoundaryCondition | InputValidationError
+MalformedInput | InputValidationError
+BufferOverFlow | n400bfa89794248ebaf5f378ec6774ec4b1
+BufferOverFlow | Means
+ConfigurationError | Means
+ExICMPEchoReq | Means
+ExIPPacketSize | Means
+IPFrag | Means
+SynFlood | Means
+UserEnumeration | Means
+InputValidationError | Means
+Probe | Means
+RemoteAccess | Means
+MaliciousCodeExecution | Means
+BufferOverFlow | TTP
+ConfigurationError | TTP
+ExICMPEchoReq | TTP
+ExIPPacketSize | TTP
+IPFrag | TTP
+SynFlood | TTP
+InputValidationError | TTP
+Probe | TTP
+RemoteAccess | TTP
+MaliciousCodeExecution | TTP
+ConfigurationError | n400bfa89794248ebaf5f378ec6774ec4b2
+DistributedCode | n400bfa89794248ebaf5f378ec6774ec4b3
+DistributedCode | MaliciousCodeExecution
+ParisiticCode | MaliciousCodeExecution
+Rootkit | MaliciousCodeExecution
+Trojans | MaliciousCodeExecution
+Backdoor | MaliciousCodeExecution
+SelfPropagatingCode | MaliciousCodeExecution
+TriggeredCode | MaliciousCodeExecution
+DomainExpert | Source
+IDPS | Source
+Web | Source
+ExcessForks | DenialOfService
+MemoryConsumption | DenialOfService
+PingOfDeath | DenialOfService
+SysCrash | DenialOfService
+NetFlood | DenialOfService
+DDoS | DenialOfService
+IPFrag | n400bfa89794248ebaf5f378ec6774ec4b4
+IPv4Address | IPAddress
+IPv6Address | IPAddress
+MACAddress | Address
+AddressData | Address
+AddressEmail | Address
+AddressName | Address
+AddressNumber | Address
+CompanyEmail | Address
+EmailEmployee | Address
+EmailInformation | Address
+EmailName | Address
+EmailNumber | Address
+IPAddress | Address
+ParisiticCode | n400bfa89794248ebaf5f378ec6774ec4b5
+PingScan | Probe
+RSTProbe | Probe
+SynScan | Probe
+TCPConnect | Probe
+TCPPortScan | Probe
+rstProbe | Probe
+Rootkit | n400bfa89794248ebaf5f378ec6774ec4b6
+Rootkit | n400bfa89794248ebaf5f378ec6774ec4b7
+SynFlood | n400bfa89794248ebaf5f378ec6774ec4b8
+TCPPortScan | n400bfa89794248ebaf5f378ec6774ec4b9
+Time | TriggeredCode
+Logic | TriggeredCode
+Trojans | n400bfa89794248ebaf5f378ec6774ec4b10
+Trojans | n400bfa89794248ebaf5f378ec6774ec4b11
+UnauthRoot | PrivilegeEsc
+UnauthUser | PrivilegeEsc
+UserEnumeration | n400bfa89794248ebaf5f378ec6774ec4b12
+UserEnumeration | RemoteAccess
+AbleAccess | RemoteAccess
+AccessNetwork | RemoteAccess
+AccessService | RemoteAccess
+AccessSecurity | RemoteAccess
+Virus | SelfPropagatingCode
+Worm | SelfPropagatingCode
+WebBrowser | Software
+CompanyComputer | Software
+CompanySoftware | Software
+DataSoftware | Software
+KernelModule | Software
+OperatingSystem | Software
+AccessBreach | Exploit
+AccessHacker | Exploit
+AttackBreach | Exploit
+AttackComputer | Exploit
+AttackHacker | Exploit
+AttackOperation | Exploit
+BreachComputer | Exploit
+BreachFile | Exploit
+BreachHacker | Exploit
+BreachVulnerability | Exploit
+CompanyHacker | Exploit
+CustomerHacker | Exploit
+GroupHacking | Exploit
+HackerSteal | Exploit
+BreachUser | Exploit
+AccessAttack | Exploit
+DefaceHacker | Exploit
+BreachSecurity | Exploit
+HackerSecurity | Exploit
+AccessSystem | System
+ActorSystem | System
+AttackSystem | System
+BreachSystem | System
+CompanySystem | System
+ComputerSystem | System
+CustomerSystem | System
+DataSystem | System
+EmailSystem | System
+GroupSystem | System
+HackerSystem | System
+HealthSystem | System
+InformationSystem | System
+NetworkSystem | System
+OrganizationSystem | System
+PersonalSystem | System
+SecuritySystem | System
+ServiceSystem | System
+SystemThreat | System
+SystemU | System
+AccountEmployee | Account
+AccountInformation | Account
+Password | Account
+Username | Account
+email | Account
+AccountGroup | BaseGroup
+BreachGroup | BaseGroup
+DataGroup | BaseGroup
+GroupInformation | BaseGroup
+GroupService | BaseGroup
+AccountUser | UnauthUser
+DataUser | UnauthUser
+HackerUser | UnauthUser
+ActorMalware | Malware
+CompanyMalware | Malware
+ComputerUnauthorized | Malware
+DataMalware | Malware
+HackerService | Malware
+MalwareState | Malware
+MalwareThreat | Malware
+MalwareVictim | Malware
+RansomSystem | Malware
+Ransomware | Malware
+AttackMalware | Malware
+ActorVictim | Victim
+AmongVictim | Victim
+AttackVictim | Victim
+BreachVictim | Victim
+CompanyVictim | Victim
+DataVictim | Victim
+GangVictim | Victim
+GroupVictim | Victim
+OrganizationVictim | Victim
+SecurityVictim | Victim
+StateVictim | Victim
+SystemVictim | Victim
+ThreatVictim | Victim
+ToolVictim | Victim
+UVictim | Victim
+AllegedlyData | DataCorruption
+DarkData | DataCorruption
+DataHacker | DataCorruption
+DataHealth | DataCorruption
+DataIncident | DataCorruption
+DataSociety | DataCorruption
+DataThirdparty | DataCorruption
+DataThreat | DataCorruption
+DataUnauthorized | DataCorruption
+DataSecurity | DataCorruption
+AnonymousCollective | EnvironmentalGroup
+CompanyGroup | EnvironmentalGroup
+CyberGroup | EnvironmentalGroup
+GovernmentGroup | EnvironmentalGroup
+GroupOrganization | EnvironmentalGroup
+GroupThreat | EnvironmentalGroup
+GroupWebsite | EnvironmentalGroup
+AttackAttacker | AttackPattern
+AttackClaim | AttackPattern
+AttackCollective | AttackPattern
+AttackCompany | AttackPattern
+AttackData | AttackPattern
+AttackDay | AttackPattern
+AttackDistrict | AttackPattern
+AttackFile | AttackPattern
+AttackGang | AttackPattern
+AttackMinistry | AttackPattern
+AttackNoname | AttackPattern
+AttackNotifies | AttackPattern
+AttackOfficial | AttackPattern
+AttackOrganization | AttackPattern
+AttackPatient | AttackPattern
+AttackPeople | AttackPattern
+AttackProvider | AttackPattern
+AttackResponsibility | AttackPattern
+AttackService | AttackPattern
+AttackState | AttackPattern
+AttackTarget | AttackPattern
+AttackThreat | AttackPattern
+AttackTwo | AttackPattern
+AttackGroup | AttackPattern
+AttackSecurity | AttackPattern
+AttackerData | AttackPattern
+AttackInformation | AttackPattern
+AttackSchool | AttackPattern
+AgencyAttack | AttackPattern
+AttackCyber | BotnetAttack
+AttackNetwork | BotnetAttack
+AttackServer | BotnetAttack
+CompanyCyberattack | BotnetAttack
+CyberattackHit | BotnetAttack
+CyberattackService | BotnetAttack
+EmailHacker | BotnetAttack
+GroupHacker | BotnetAttack
+HackerWebsite | BotnetAttack
+NetworkThreat | BotnetAttack
+AttackEmail | BotnetAttack
+AttackPhishing | BotnetAttack
+CyberattackSystem | BotnetAttack
+CyberattackInformation | BotnetAttack
+AnonymousAttack | BotnetAttack
+AccountAttack | BotnetAttack
+DDoS | BotnetAttack
+CyberattackData | BotnetAttack
+AttackWebsite | BotnetAttack
+AttackDdos | DDoS
+DdosService | DDoS
+AttackHealth | Vulnerability
+BreachSensitive | Vulnerability
+BreachThreat | Vulnerability
+CveVulnerability | Vulnerability
+DataVulnerability | Vulnerability
+SecurityThreat | Vulnerability
+Incident | Vulnerability
+Attack | Vulnerability
+CompanyIncident | Attack
+HealthIncident | Attack
+IncidentInformation | Attack
+CompanyIncident | Incident
+HealthIncident | Incident
+IncidentInformation | Incident
+CompanyState | NetworkState
+DataState | NetworkState
+HackerState | NetworkState
+NetworkParty | NetworkState
+CompanyWebsite | Web
+DarkWeb | Web
+DataSite | Web
+DataWeb | Web
+DataWebsite | Web
+InformationOnline | Web
+InformationWebsite | Web
+LeakWeb | Web
+NameWebsite | Web
+NetworkWeb | Web
+OnlineService | Web
+OrganizationWebsite | Web
+PortalWeb | Web
+SecurityWebsite | Web
+ServiceWebsite | Web
+SeveralWebsite | Web
+SiteWeb | Web
+SiteWebsite | Web
+SocietyWeb | Web
+ViceWeb | Web
+ComputerData | File
+ComputerFile | File
+ConfidentialFile | File
+DataFile | File
+ComputerInformation | Hardware
+ComputerNetwork | Network
+DataNetwork | Network
+FileNetwork | Network
+InformationNetwork | Network
+EmailHealth | email
+EmailSecurity | email
+EmailService | email
+FileSystem | OperatingSystem
+InformationParty | IDPS
+InformationPhishing | Phishing
+EmailPhishing | Phishing
+Backdoor | n400bfa89794248ebaf5f378ec6774ec4b13
+MitnickAttack | Observable
+LossOfIntegrity | Observable
+DataBreach | Observable
+DataLeak | Observable
+LossOfConf | Observable
+RemoteAccess | Observable
+DenialOfService | Observable
+Phishing | Observable
+BotnetAttack | Observable
+MitnickAttack | Observable
+LossOfIntegrity | Observable
+DataBreach | Observable
+DataLeak | Observable
+LossOfConf | Observable
+RemoteAccess | Observable
+DenialOfService | Observable
+Phishing | Observable
+BotnetAttack | Observable
+MitnickAttack | Consequence
+LossOfIntegrity | Consequence
+DataBreach | Consequence
+DataLeak | Consequence
+LossOfConf | Consequence
+RemoteAccess | Consequence
+DenialOfService | Consequence
+Phishing | Consequence
+BotnetAttack | Consequence
+MitnickAttack | Observable
+LossOfIntegrity | Observable
+DataBreach | Observable
+DataLeak | Observable
+LossOfConf | Observable
+RemoteAccess | Observable
+DenialOfService | Observable
+Phishing | Observable
+BotnetAttack | Observable
+BreachData | DataBreach
+BreachInformation | DataBreach
+BreachData | DataLeak
+DataLeak | DataLeak
+BreachInformation | DataLeak
+KillChain | UCOThing
+TemporalGroup | UCOThing
+KillChainPhase | UCOThing
+OtherTechnicalTerms | UCOThing
+CCE | UCOThing
+CVE | UCOThing
+OSVDB | UCOThing
+Indicator | UCOThing
+Hardware | UCOThing
+KillChainPhase | UCOThing
+KillChain | UCOThing
+File | UCOThing
+Network | UCOThing
+Source | UCOThing
+Account | UCOThing
+CVSSScoreType | UCOThing
+MeansOrConsequence | UCOThing
+BaseGroup | UCOThing
+ExploitTarget | UCOThing
+NetworkState | UCOThing
+EnvironmentalGroup | UCOThing
+Product | UCOThing
+Software | UCOThing
+Address | UCOThing
+Observable | UCOThing
+Observable | UCOThing
+Process | UCOThing
+Victim | UCOThing
+Observable | UCOThing
+Exploit | UCOThing
+Indicator | UCOThing
+Malware | UCOThing
+CourseofAction | UCOThing
+System | UCOThing
+AttackPattern | UCOThing
+Vulnerability | UCOThing
+Weakness | UCOThing
+TTP | UCOThing
+CWE | UCOThing
+Incident | UCOThing
+StatementType | UCOThing
+Attack | UCOThing
+ThreatActor | UCOThing
+Campaign | UCOThing
+Attacker | UCOThing
+TemporalGroup | CVSSScoreType
+BaseGroup | CVSSScoreType
+EnvironmentalGroup | CVSSScoreType
+DirectoryExposure | LossOfConf
+PrivilegeEsc | LossOfConf
+InputValidationError | n400bfa89794248ebaf5f378ec6774ec4b24
+SelfPropagatingCode | n400bfa89794248ebaf5f378ec6774ec4b25
+TriggeredCode | n400bfa89794248ebaf5f378ec6774ec4b26
+TriggeredCode | n400bfa89794248ebaf5f378ec6774ec4b27
+ConfidenceType | CourseofAction
+Hardware | Product
+Software | Product
+HackUsernames | Username
+LogicExploit | Logic
+Probe | n400bfa89794248ebaf5f378ec6774ec4b36
+Probe | n400bfa89794248ebaf5f378ec6774ec4b37
+DataCorruption | LossOfIntegrity
+Observable | MeansOrConsequence
+Observable | MeansOrConsequence
+Observable | MeansOrConsequence
+Consequence | MeansOrConsequence
+TTP | MeansOrConsequence
+Means | MeansOrConsequence
+Means | n400bfa89794248ebaf5f378ec6774ec4b42
+Incident | Indicator
+Attack | Indicator
+Incident | Campaign
+Attack | Campaign
+Incident | Indicator
+Attack | Indicator
+Campaign | n400bfa89794248ebaf5f378ec6774ec4b50
+
+--------------------------------------------------
+
+QUERY: 9. Rilevamento Record Incompleti (Data Quality)
+incidente
+AtError
+BoundaryCondition
+BufferOverFlow
+ConfigurationError
+DistributedCode
+DomainExpert
+ExICMPEchoReq
+ExIPPacketSize
+ExceptionCondition
+ExcessForks
+
+--------------------------------------------------
+
+QUERY: 10. Validazione Relazioni Inverse Inferite
+Nessun dato rilevato
+
+--------------------------------------------------
+
+QUERY: 11. Distribuzione Mensile degli Attacchi (Trend)
+mese | conteggio
+1 | 87
+2 | 81
+3 | 40
+4 | 53
+5 | 41
+6 | 58
+7 | 45
+8 | 78
+9 | 14
+11 | 2
+12 | 1
+
+--------------------------------------------------
+
+QUERY: 12. Analisi Geografica degli Incidenti
+paese | totale
+United States of America | 223
+United Kingdom of Great Britain and Northern Ireland | 22
+Pakistan | 21
+India | 18
+Saudi Arabia | 17
+Turkey | 16
+Israel | 15
+Ukraine | 12
+Australia | 10
+Canada | 9
+France | 9
+Norway | 7
+Brazil | 7
+Philippines | 6
+Armenia | 5
+China | 5
+Belgium | 4
+Japan | 4
+Malaysia | 4
+Italy | 4
+Spain | 4
+Syrian Arab Republic | 4
+Guatemala | 3
+Slovakia | 3
+New Zealand | 3
+United Arab Emirates | 3
+Finland | 3
+Nepal | 3
+Russian Federation | 3
+Egypt | 3
+Germany | 3
+Nigeria | 3
+Sweden | 2
+Turkmenistan | 2
+Singapore | 2
+Korea (the Republic of) | 2
+Czechia | 2
+Cyprus | 1
+Tajikistan | 1
+Poland | 1
+Austria | 1
+Taiwan (Province of China) | 1
+Venezuela (Bolivarian Republic of) | 1
+Palau | 1
+Bangladesh | 1
+Kenya | 1
+Paraguay | 1
+Ecuador | 1
+Myanmar | 1
+Namibia | 1
+Azerbaijan | 1
+Slovenia | 1
+Ireland | 1
+Viet Nam | 1
+Lithuania | 1
+Lebanon | 1
+Denmark | 1
+Kuwait | 1
+Montenegro | 1
+
+--------------------------------------------------
+
+QUERY: 13. Correlazione Attore-Tipo Attacco (Specializzazione)
+Nessun dato rilevato
+
+--------------------------------------------------
+
+QUERY: 14. Rilevamento Sottoclassi Senza Istanze (Dead Classes)
+classe
+AtError
+BoundaryCondition
+BufferOverFlow
+ConfigurationError
+DistributedCode
+DomainExpert
+ExICMPEchoReq
+ExIPPacketSize
+ExceptionCondition
+ExcessForks
+IPFrag
+IPv4Address
+IPv6Address
+MACAddress
+MalformedInput
+MemoryConsumption
+ParisiticCode
+PingOfDeath
+PingScan
+RSTProbe
+RaceCondition
+Rootkit
+SerialError
+SynFlood
+SynScan
+SysCrash
+TCPConnect
+TCPPortScan
+Time
+Trojans
+UnauthRoot
+UserEnumeration
+Virus
+WebBrowser
+Worm
+rstProbe
+AbleAccess
+AccessBreach
+AccessHacker
+AccessNetwork
+AccessService
+AccessSystem
+AccountEmployee
+AccountGroup
+AccountInformation
+AccountUser
+ActorMalware
+ActorSystem
+ActorVictim
+AddressData
+AddressEmail
+AddressName
+AddressNumber
+AllegedlyData
+AmongVictim
+AnonymousCollective
+AttackAttacker
+AttackBreach
+AttackClaim
+AttackCollective
+AttackCompany
+AttackComputer
+AttackCyber
+AttackData
+AttackDay
+AttackDdos
+AttackDistrict
+AttackFile
+AttackGang
+AttackHacker
+AttackHealth
+AttackMinistry
+AttackNetwork
+AttackNoname
+AttackNotifies
+AttackOfficial
+AttackOperation
+AttackOrganization
+AttackPatient
+AttackPeople
+AttackProvider
+AttackResponsibility
+AttackServer
+AttackService
+AttackState
+AttackSystem
+AttackTarget
+AttackThreat
+AttackTwo
+AttackVictim
+BreachComputer
+BreachFile
+BreachGroup
+BreachHacker
+BreachSensitive
+BreachSystem
+BreachThreat
+BreachVictim
+BreachVulnerability
+CompanyComputer
+CompanyCyberattack
+CompanyEmail
+CompanyGroup
+CompanyHacker
+CompanyIncident
+CompanyMalware
+CompanySoftware
+CompanyState
+CompanySystem
+CompanyVictim
+CompanyWebsite
+ComputerData
+ComputerFile
+ComputerInformation
+ComputerNetwork
+ComputerSystem
+ComputerUnauthorized
+ConfidentialFile
+CustomerHacker
+CustomerSystem
+CveVulnerability
+CyberGroup
+CyberattackHit
+CyberattackService
+DarkData
+DarkWeb
+DataFile
+DataGroup
+DataHacker
+DataHealth
+DataIncident
+DataMalware
+DataNetwork
+DataSite
+DataSociety
+DataSoftware
+DataState
+DataSystem
+DataThirdparty
+DataThreat
+DataUnauthorized
+DataUser
+DataVictim
+DataVulnerability
+DataWeb
+DataWebsite
+DdosService
+EmailEmployee
+EmailHacker
+EmailHealth
+EmailInformation
+EmailName
+EmailNumber
+EmailSecurity
+EmailService
+EmailSystem
+FileNetwork
+FileSystem
+GangVictim
+GovernmentGroup
+GroupHacker
+GroupHacking
+GroupInformation
+GroupOrganization
+GroupService
+GroupSystem
+GroupThreat
+GroupVictim
+GroupWebsite
+HackerService
+HackerState
+HackerSteal
+HackerSystem
+HackerWebsite
+HealthIncident
+HealthSystem
+IncidentInformation
+InformationNetwork
+InformationOnline
+InformationParty
+InformationPhishing
+InformationSystem
+InformationWebsite
+LeakWeb
+MalwareState
+NameWebsite
+NetworkParty
+NetworkSystem
+NetworkThreat
+NetworkWeb
+OnlineService
+OrganizationSystem
+OrganizationVictim
+OrganizationWebsite
+Password
+PersonalSystem
+PortalWeb
+SecuritySystem
+SecurityThreat
+SecurityVictim
+SecurityWebsite
+ServiceSystem
+ServiceWebsite
+SeveralWebsite
+SiteWeb
+SiteWebsite
+SocietyWeb
+StateVictim
+SystemThreat
+SystemU
+SystemVictim
+ThreatVictim
+ToolVictim
+UVictim
+ViceWeb
+IDPS
+Logic
+MitnickAttack
+NetFlood
+KillChain
+TemporalGroup
+Username
+KillChainPhase
+DirectoryExposure
+InputValidationError
+OtherTechnicalTerms
+SelfPropagatingCode
+TriggeredCode
+CCE
+CVE
+ConfidenceType
+OSVDB
+Indicator
+Hardware
+KernelModule
+LossOfIntegrity
+OperatingSystem
+UnauthUser
+DataBreach
+KillChainPhase
+email
+KillChain
+File
+IPAddress
+LogicExploit
+PrivilegeEsc
+DataLeak
+Network
+Source
+Account
+CVSSScoreType
+MeansOrConsequence
+BaseGroup
+LossOfConf
+NetworkState
+RemoteAccess
+EnvironmentalGroup
+Product
+Software
+DataCorruption
+DenialOfService
+Address
+Observable
+Observable
+Process
+Victim
+Observable
+Exploit
+Consequence
+Web
+Indicator
+CourseofAction
+System
+AttackPattern
+Vulnerability
+
+--------------------------------------------------
+
+QUERY: 15. Analisi delle Motivazioni prevalenti
+motivo | tot
+
+--------------------------------------------------
+
+QUERY: 16. Catena di Relazioni (Attore -> Incidente -> Campagna)
+Nessun dato rilevato
+
+--------------------------------------------------
+
+QUERY: 17. Identificazione Individui con Commenti Multipli (Anomalie)
+Nessun dato rilevato
+
+--------------------------------------------------
+
+QUERY: 18. Analisi delle Campagne per Settore Industriale
+campagna | industria | n
+
+--------------------------------------------------
+
+QUERY: 19. Filtro Comportamentale (Behaviour vs Tipo)
+behaviour | tipo | n
+Financial | Disruptive | 10
+Financial | Exploitive | 97
+Financial | Mixed | 3
+Protest | Disruptive | 96
+Protest | Exploitive | 26
+Protest | Mixed | 4
+Political_Espionage | Exploitive | 15
+Political_Espionage | Mixed | 1
+Personal_Attack | Exploitive | 7
+Personal_Attack | Disruptive | 1
+Industrial_Espionage | Exploitive | 5
+Sabotage | Mixed | 1
+
+--------------------------------------------------
+
+QUERY: 20. Statistiche di Inserimento (Individui per Classe Madre)
+superClasse | nIndividui
+UCOThing | 3894
+Vulnerability | 1000
+Indicator | 1000
+Campaign | 1000
+Indicator | 1000
+MeansOrConsequence | 522
+n400bfa89794248ebaf5f378ec6774ec4b50 | 517
+BotnetAttack | 289
+n400bfa89794248ebaf5f378ec6774ec4b42 | 261
+Exploit | 101
+DataBreach | 48
+DataLeak | 48
+DenialOfService | 44
+Observable | 13
+Observable | 13
+Consequence | 13
+Observable | 13
+RemoteAccess | 10
+AttackPattern | 10
+Malware | 8
+Phishing | 4
+UnauthUser | 3
+Username | 3
+Means | 2
+TTP | 2
+MaliciousCodeExecution | 1
+DataCorruption | 1
+n400bfa89794248ebaf5f378ec6774ec4b13 | 1
+n400bfa89794248ebaf5f378ec6774ec4b36 | 1
+n400bfa89794248ebaf5f378ec6774ec4b37 | 1
+
+--------------------------------------------------
+

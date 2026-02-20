@@ -1,0 +1,127 @@
+REPORT TECNICO DI VALIDAZIONE E METRICHE
+
+Timestamp esecuzione: 2026-02-20 16:52:27
+Esito coerenza logica: Consistent
+Durata totale pipeline: 327.16s
+
+VALUTAZIONE CRESCITA INFERENZIALE
+Volume triple base: 12940
+Volume triple inferite: 17154
+Nuova conoscenza prodotta: 4214 affermazioni
+Coefficiente di espansione: 32.57%
+
+DESCRITTORI STRUTTURALI E COMPLESSITA
+Classi totali: 332
+Individui totali: 6492
+Proprieta totali: 174
+Rapporto istanze per classe: 19.55
+Indice di ricchezza semantica: 0.52
+Grado di densita relazionale: 2.64
+
+EFFICACIA INFORMATIVA (COMPETENCY QUESTIONS)
+Quesiti SPARQL risolti: 20/20
+
+PITFALLS E ANOMALIE RILEVATE
+[P08] Missing comment for Class: N9f98c0b337bc46898203fecaa05b0fa1
+[P08] Missing comment for Class: N45e095fb62184038a69f52cfce946b48
+[P08] Missing comment for Class: Nb50b155a22e04ff591a025f5823f6690
+[P08] Missing comment for Class: N8ea6ee299ce24374b241a185128b4c79
+[P08] Missing comment for Class: Nfa07f2b06ec6472bb4fb62be18c8d4e0
+[P08] Missing comment for Class: N8b61c016063d4a1f91a3cae4f8f01d4f
+[P08] Missing comment for Class: Nefb83a2685fa4145b903355621046408
+[P08] Missing comment for Individual/Property: Response
+[P08] Missing comment for Individual/Property: None
+[P08] Missing comment for Individual/Property: Remedy
+[P08] Missing comment for Individual/Property: Low
+[P08] Missing comment for Individual/Property: Unknown
+[P08] Missing comment for Individual/Property: High
+[P08] Missing comment for Individual/Property: Medium
+[P08] Missing comment for Individual/Property: numChildProcesses
+[P08] Missing comment for Individual/Property: hasSourceURL
+[P08] Missing comment for Individual/Property: chgUid
+[P08] Missing comment for Individual/Property: isNew
+[P08] Missing comment for Individual/Property: hasAccessComplexity
+[P08] Missing comment for Individual/Property: hasSeverityScore
+[P08] Missing comment for Individual/Property: generated-on-datetime
+[P08] Missing comment for Individual/Property: discoveryTime
+[P08] Missing comment for Individual/Property: chgGid
+[P08] Missing comment for Individual/Property: hasCountry
+[P08] Missing comment for Individual/Property: lastModifiedDateTime
+[P08] Missing comment for Individual/Property: hasCodeSize
+[P08] Missing comment for Individual/Property: hasEventSubtype
+[P08] Missing comment for Individual/Property: hasTitle
+[P08] Missing comment for Individual/Property: hasLibSize
+[P08] Missing comment for Individual/Property: cweID
+[P08] Missing comment for Individual/Property: hasMotive
+[P08] Missing comment for Individual/Property: hasOrganization
+[P08] Missing comment for Individual/Property: chgSUid
+[P08] Missing comment for Individual/Property: chgPPid
+[P08] Missing comment for Individual/Property: cweSummary
+[P08] Missing comment for Individual/Property: hasVendor
+[P08] Missing comment for Individual/Property: newDestIP
+[P08] Missing comment for Individual/Property: hasIndustry
+[P08] Missing comment for Individual/Property: commonConsequences
+[P08] Missing comment for Individual/Property: hasConfidentialityImpact
+[P08] Missing comment for Individual/Property: timeOfIntroduction
+[P08] Missing comment for Individual/Property: hasYear
+[P08] Missing comment for Individual/Property: hasActor
+[P08] Missing comment for Individual/Property: dataSize
+[P08] Missing comment for Individual/Property: hasCounty
+[P08] Missing comment for Individual/Property: opensPort
+[P08] Missing comment for Individual/Property: selfDist
+[P08] Missing comment for Individual/Property: anomolousDataOutFlow
+[P08] Missing comment for Individual/Property: hasDescription
+[P08] Missing comment for Individual/Property: hasAuthentication
+[P08] Missing comment for Individual/Property: hasTime
+[P08] Missing comment for Individual/Property: score
+[P08] Missing comment for Individual/Property: hasEventDate
+[P08] Missing comment for Individual/Property: hasActorCountry
+[P08] Missing comment for Individual/Property: hasMonth
+[P08] Missing comment for Individual/Property: hasActorType
+[P08] Missing comment for Individual/Property: numProcessesRunning
+[P08] Missing comment for Individual/Property: hasAvailabilityImpact
+[P08] Missing comment for Individual/Property: summary
+[P08] Missing comment for Individual/Property: cweExtendedSummary
+[P08] Missing comment for Individual/Property: description
+[P08] Missing comment for Individual/Property: hasState
+[P08] Missing comment for Individual/Property: hasIntegrityImpact
+[P08] Missing comment for Individual/Property: newPortsOpened
+[P08] Missing comment for Individual/Property: hasEventType
+[P08] Missing comment for Individual/Property: numOpenFiles
+[P08] Missing comment for Individual/Property: publishedDateTime
+[P08] Missing comment for Individual/Property: cweName
+[P08] Missing comment for Individual/Property: hasDataSize
+[P08] Missing comment for Individual/Property: hasAccessVector
+[P08] Missing comment for Individual/Property: hasVulnerabilityTerm
+[P08] Missing comment for Individual/Property: showsInfectionSigns
+[P08] Missing comment for Individual/Property: N2c0c7b3e84de40b5ac8afcf9e823c5a7
+[P08] Missing comment for Individual/Property: N84300fb69e834553ae42898667cd3ccf
+[P08] Missing comment for Individual/Property: N467d41dc356941cbb1c788e3b79c307e
+[P08] Missing comment for Individual/Property: Ne9f5a9cb147746b288f1a220d980e8eb
+[P08] Missing comment for Individual/Property: N0f04c1aba40c4135bb9f773002eacafa
+[P08] Missing comment for Individual/Property: N8df539fae893471189711d2f44eee151
+[P08] Missing comment for Individual/Property: N82f3d85a2c7e424ab751ea3338e6423f
+[P08] Missing comment for Individual/Property: Na2a438fb023e461b8550e7f2bd1ea7fb
+[P08] Missing comment for Individual/Property: N7c2e4d62491d4e37bab7053557644384
+[P08] Missing comment for Individual/Property: Ndec7d80c51184469b129059df5c5ac72
+[P08] Missing comment for Individual/Property: N3c387e74e2114d438c50cdd6b7bde8ea
+[P08] Missing comment for Individual/Property: N8ac7ab8bb2e0441cbd3ae17ac338d3ee
+[P08] Missing comment for Individual/Property: N2e70674571af433e80cef358a939ec73
+[P08] Missing comment for Individual/Property: Ne32eae12d26e48158cb2288d9f6dac9f
+[P08] Missing comment for Individual/Property: N027fc78f4dc94695b38684d00ce5c3e0
+[P08] Missing comment for Individual/Property: Ne843be22f85c42ceb9a9b9ef0f87d995
+[P08] Missing comment for Individual/Property: Nc35aec97be2e4633a9a3d0b3c966b041
+[P08] Missing comment for Individual/Property: N49915bdb51704c4eada515a07fd09be7
+[P08] Missing comment for Individual/Property: N3b5ac42371ad426cb98775ba32c240eb
+[P08] Missing comment for Individual/Property: N0a36b2eaf2e84da7976bf5323ef58a05
+[P08] Missing comment for Individual/Property: N03c66d7d86d0499baabba4c8671a90c7
+[P08] Missing comment for Individual/Property: N557e02d024b44368993a85ff6e4849fc
+[P08] Missing comment for Individual/Property: N466492d8903e4bf8ac26fc5342fa72e5
+[P08] Missing comment for Individual/Property: N4f71537120664052a65eaa498d7ed0fc
+[P08] Missing comment for Individual/Property: N26d81fc8f13a4d8ba74636c5dde9fa07
+[P08] Missing comment for Individual/Property: ontology
+[P11] Missing Domain for Property: isMACAddress_of
+[P11] Missing Range for Property: isMACAddress_of
+[P11] Missing Range for Property: isConfidenceValue_of
+[P13-Warning] No inverse relation for: resultsIn
+[P13-Warning] No inverse relation for: connectedTo
