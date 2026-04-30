@@ -1,3 +1,13 @@
+"""
+Step 1: Co-occurrence Matrix Generation
+
+This module processes the Cyber_Events_Database.xlsx file to extract meaningful 
+term co-occurrences from event descriptions. It performs text preprocessing using 
+NLTK (tokenization, stopword removal, lemmatization), identifies the top 1000 most 
+frequent terms, and builds a co-occurrence matrix capturing term relationships.
+The output is saved as matrice_cooccorrenze.xlsx for downstream semantic mapping.
+"""
+
 import pandas as pd
 import re
 import nltk
@@ -11,43 +21,46 @@ nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
 nltk.download('punkt_tab', quiet=True)
 
-stop_words = set(stopwords.words('english'))  
+stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
+
 def clean_text(text):
+    """Normalize and tokenize input text."""
     text = str(text).lower()
     text = re.sub(r'[^a-zA-Z\s]', '', text)
     tokens = nltk.word_tokenize(text)
     tokens = [lemmatizer.lemmatize(w) for w in tokens if w not in stop_words]
-    return tokens   
+    return tokens
 
-df = pd.read_excel("Cyber_Events_Database.xlsx")
-df["tokens"] = df["description"].apply(clean_text)
 
-all_tokens = [w for tokens in df["tokens"] for w in tokens]
-word_counts = Counter(all_tokens)
+def main():
+    """Generate co-occurrence matrix from cyber events database."""
+    df = pd.read_excel("Cyber_Events_Database.xlsx")
+    df["tokens"] = df["description"].apply(clean_text)
 
-top_n = 1000
-top_words = [w for w, _ in word_counts.most_common(top_n)]
-top_words_set = set(top_words)
+    all_tokens = [w for tokens in df["tokens"] for w in tokens]
+    word_counts = Counter(all_tokens)
 
-cooc = Counter()
+    top_n = 1000
+    top_words = [w for w, _ in word_counts.most_common(top_n)]
+    top_words_set = set(top_words)
 
-for tokens in df["tokens"]:
-    unique_tokens = set(tokens) & top_words_set  
-    for w1, w2 in combinations(unique_tokens, 2):
-        cooc[(w1, w2)] += 1
-        cooc[(w2, w1)] += 1  
+    cooc = Counter()
 
-cooc_matrix = pd.DataFrame(0, index=top_words, columns=top_words)
+    for tokens in df["tokens"]:
+        unique_tokens = set(tokens) & top_words_set
+        for w1, w2 in combinations(unique_tokens, 2):
+            cooc[(w1, w2)] += 1
+            cooc[(w2, w1)] += 1
 
-for (w1, w2), count in cooc.items():
-    cooc_matrix.at[w1, w2] = count
+    cooc_matrix = pd.DataFrame(0, index=top_words, columns=top_words)
 
-cooc_matrix.to_excel("matrice_cooccorrenze.xlsx")
+    for (w1, w2), count in cooc.items():
+        cooc_matrix.at[w1, w2] = count
 
-# Il codice elabora il file Excel iniziale. Si utilizza Pandas per gestire i dati.
-# La libreria NLTK pulisce il testo descrittivo e si applica la lemmatizzazione per normalizzare termini.
-# Si isolano le mille parole più frequenti, questa scelta garantisce efficienza computazionale elevata. 
-# Itertools individua le relazioni tra i token. 
-# Si produce una matrice di cooccorrenze finale. L'output viene esportato in formato Excel.
+    cooc_matrix.to_excel("matrice_cooccorrenze.xlsx", index=False)
+
+
+if __name__ == "__main__":
+    main()

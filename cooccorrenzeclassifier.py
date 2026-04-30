@@ -1,25 +1,45 @@
+"""
+Step 2: Co-occurrence Classification
+
+This module processes the co-occurrence matrix generated in Step 1. It filters 
+term pairs based on a frequency threshold (100 occurrences) to remove statistical 
+noise, eliminates symmetric duplicates, and produces a ranked classification file.
+The output serves as input for semantic mapping in Step 3.
+"""
+
 import pandas as pd
 
-ORIGIN = "matrice_cooccorrenze.xlsx"
-OUTPUT = "classifica_cooccorrenze.xlsx"
 
-def rebuild_cooccurrences(path, threshold=100):
-    df = pd.read_excel(path, index_col=0)
-
+def rebuild_cooccurrences(input_path: str, threshold: int = 100) -> pd.DataFrame:
+    """
+    Restructure co-occurrence matrix into ranked list.
+    
+    Args:
+        input_path: Path to the co-occurrence matrix Excel file
+        threshold: Minimum co-occurrence count to include
+        
+    Returns:
+        DataFrame with filtered and ranked term pairs
+    """
+    df = pd.read_excel(input_path, index_col=0)
+    
     stack = df.stack().reset_index()
     stack.columns = ['Parola1', 'Parola2', 'Cooccorrenze']
-
+    
     ranking = stack[stack['Cooccorrenze'] > threshold]
-
     ranking = ranking[ranking['Parola1'] < ranking['Parola2']]
+    
     return ranking.sort_values(by='Cooccorrenze', ascending=False)
 
-df_result = rebuild_cooccurrences(ORIGIN)
-df_result.to_excel(OUTPUT, index=False)
 
-# Il codice carica la matrice generata precedentemente. Si utilizza Pandas per ristrutturare i dati. 
-# L'input è il file matrice_cooccorrenze.xlsx. Si applica la funzione stack per incolonnare.
-# Si imposta un threshold di 100 occorrenze, questa scelta tecnica filtra il rumore statistico. 
-# Si eliminano i duplicati speculari tra parole e si ottiene una classifica ordinata per rilevanza. 
-# L'output viene salvato in classifica_cooccorrenze.xlsx, poi analizzano questi dati per selezionare entity. 
-# I termini scelti arricchiranno l'ontologia UCO. Le nuove definizioni confluiscono in ontologyadd.xlsx.( a mano post lettura)
+def main():
+    """Main entry point for co-occurrence classification."""
+    origin = "matrice_cooccorrenze.xlsx"
+    output = "classifica_cooccorrenze.xlsx"
+    
+    df_result = rebuild_cooccurrences(origin)
+    df_result.to_excel(output, index=False)
+
+
+if __name__ == "__main__":
+    main()
