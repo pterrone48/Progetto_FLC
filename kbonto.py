@@ -1,3 +1,16 @@
+"""
+Step 5: ABox Injection
+
+This module injects individuals from the Cyber_Events_Database.xlsx into the 
+enriched ontology. It uses semantic matching to:
+1. Identify the main pillar class for each event (Attack, Malware, Incident, etc.)
+2. Assign additional type classifications based on description similarity
+3. Map column values to object/datatype properties using embedding similarity
+4. Create new individuals for referenced entities (actors, victims, organizations)
+
+The output is a complete knowledge base in both XML and Turtle formats.
+"""
+
 import os
 import re
 import torch
@@ -8,14 +21,15 @@ from owlready2 import *
 from datetime import datetime
 from sentence_transformers import SentenceTransformer, util
 
-UCO_FILE_TTL = "uco_1_5_enriched.ttl" 
-EXCEL_FILE = "Cyber_Events_Database.xlsx"
 
 def clean_iri(text):
+    """Sanitize text for use as IRI identifier."""
     text = re.sub(r'[^a-zA-Z0-9_]', '_', str(text))
     return text.strip('_')[:40] if text else "unknown_entity"
 
+
 def adapt_value_by_range(val_str, prop):
+    """Adapt value to match property range constraints."""
     try:
         p_range = prop.range
         if int in p_range or any("integer" in str(r).lower() for r in p_range):
@@ -26,40 +40,47 @@ def adapt_value_by_range(val_str, prop):
                 return datetime(int(val_str), 1, 1)
             return pd.to_datetime(val_str).to_pydatetime()
         return str(val_str)
-    except:
+    except Exception:
         return str(val_str)
 
+
 def run_validated_injection():
+    """Execute ABox injection pipeline with semantic validation."""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     
     g_init = rdflib.Graph()
-    g_init.parse(os.path.join(current_dir, UCO_FILE_TTL), format="turtle")
+    g_init.parse(os.path.join(current_dir, "uco_1_5_enriched.ttl"), format="turtle")
     temp_xml_bridge = os.path.join(current_dir, "temp_uco_bridge.owl")
     g_init.serialize(destination=temp_xml_bridge, format="xml")
     
     model = SentenceTransformer('all-mpnet-base-v2')
     onto = get_ontology(os.path.abspath(temp_xml_bridge)).load()
-    df = pd.read_excel(os.path.join(current_dir, EXCEL_FILE))
+    df = pd.read_excel(os.path.join(current_dir, "Cyber_Events_Database.xlsx"))
     
     with onto:
-        for p in list(onto.properties()):
+        for prop in list(onto.properties()):
             try:
-                if not p.domain: p.domain = [Thing]
-            except: pass
+                if not prop.domain:
+                    prop.domain = [Thing]
+            except Exception:
+                pass
             try:
-                if not p.range: p.range = [str if isinstance(p, DataPropertyClass) else Thing]
-            except: pass
+                if not prop.range:
+                    prop.range = [str if isinstance(prop, DataPropertyClass) else Thing]
+            except Exception:
+                pass
             
-            if isinstance(p, ObjectPropertyClass) and not p.inverse_property:
-                inv_name = f"is_{p.name}_of" if not p.name.startswith("has") else p.name.replace("has", "is") + "_of"
+            if isinstance(prop, ObjectPropertyClass) and not prop.inverse_property:
+                inv_name = f"is_{prop.name}_of" if not prop.name.startswith("has") else prop.name.replace("has", "is") + "_of"
                 try:
                     new_inv = types.new_class(inv_name, (ObjectProperty,))
-                    new_inv.inverse_property = p
-                    if hasattr(p.range, "storid") or (isinstance(p.range, list) and len(p.range) > 0):
-                        new_inv.domain = p.range
-                    if hasattr(p.domain, "storid") or (isinstance(p.domain, list) and len(p.domain) > 0):
-                        new_inv.range = p.domain
-                except: pass
+                    new_inv.inverse_property = prop
+                    if hasattr(prop.range, "storid") or (isinstance(prop.range, list) and len(prop.range) > 0):
+                        new_inv.domain = prop.range
+                    if hasattr(prop.domain, "storid") or (isinstance(prop.domain, list) and len(prop.domain) > 0):
+                        new_inv.range = prop.domain
+                except Exception:
+                    pass
 
         for cls in onto.classes():
             if not cls.comment:
@@ -101,9 +122,11 @@ def run_validated_injection():
                 main_inst.comment.append(d_val)
 
             for col, val in row.items():
-                if col in ['slug', 'description'] or pd.isna(val): continue
+                if col in ['slug', 'description'] or pd.isna(val):
+                    continue
                 val_str = str(val).strip()
-                if val_str.lower() in ["undetermined", "unknown", "n/a", "nan"]: continue
+                if val_str.lower() in ["undetermined", "unknown", "n/a", "nan"]:
+                    continue
 
                 is_year = bool(re.fullmatch(r'\d{4}', val_str))
                 col_emb = model.encode(str(col), convert_to_tensor=True)
@@ -111,32 +134,40 @@ def run_validated_injection():
                 o_sims = util.cos_sim(col_emb, o_embs)[0]
                 if o_sims.max() > 0.30:
                     op = obj_p[o_sims.argmax()]
-                    if "hascve_id" in op.name.lower(): continue
+                    if "hascve_id" in op.name.lower():
+                        continue
                     try:
                         t_cls = Thing
-                        if "victim" in col.lower(): t_cls = next((c for c in all_c if "Victim" in c.name), Thing)
-                        elif "actor" in col.lower() or "launched" in col.lower(): t_cls = next((c for c in all_c if "ThreatActor" in c.name), Thing)
+                        if "victim" in col.lower():
+                            t_cls = next((c for c in all_c if "Victim" in c.name), Thing)
+                        elif "actor" in col.lower() or "launched" in col.lower():
+                            t_cls = next((c for c in all_c if "ThreatActor" in c.name), Thing)
                         
                         t_node = t_cls(clean_iri(val_str))
                         if not t_node.comment:
                             t_node.comment.append(f"Entity representing {val_str}")
                         
-                        if not t_node in getattr(main_inst, op.python_name):
+                        if t_node not in getattr(main_inst, op.python_name):
                             getattr(main_inst, op.python_name).append(t_node)
-                    except: pass
+                    except Exception:
+                        pass
 
                 d_sims = util.cos_sim(col_emb, d_embs)[0]
                 if d_sims.max() > 0.25:
                     dp = dat_p[d_sims.argmax()]
-                    if is_year and prop_year: dp = prop_year
+                    if is_year and prop_year:
+                        dp = prop_year
                     try:
                         if hasattr(main_inst, dp.python_name):
                             final_val = adapt_value_by_range(val_str, dp)
                             prop_attr = getattr(main_inst, dp.python_name)
                             if isinstance(prop_attr, list):
-                                if final_val not in prop_attr: prop_attr.append(final_val)
-                            else: setattr(main_inst, dp.python_name, final_val)
-                    except: pass
+                                if final_val not in prop_attr:
+                                    prop_attr.append(final_val)
+                            else:
+                                setattr(main_inst, dp.python_name, final_val)
+                    except Exception:
+                        pass
 
     temp_nt = os.path.join(current_dir, "temp_final.nt")
     onto.save(file=temp_nt, format="ntriples")
@@ -150,8 +181,11 @@ def run_validated_injection():
     g_final.serialize(destination=xml_output, format="xml")
     g_final.serialize(destination=ttl_output, format="turtle")
     
-    if os.path.exists(temp_nt): os.remove(temp_nt)
-    if os.path.exists(temp_xml_bridge): os.remove(temp_xml_bridge)
+    if os.path.exists(temp_nt):
+        os.remove(temp_nt)
+    if os.path.exists(temp_xml_bridge):
+        os.remove(temp_xml_bridge)
+
 
 if __name__ == "__main__":
     run_validated_injection()

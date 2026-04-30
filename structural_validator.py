@@ -1,38 +1,62 @@
+"""
+Structural Validator Module
+
+Performs structural validation of the ontology checking for common pitfalls:
+- Missing comments on classes and properties [P08]
+- Missing domain/range definitions for object properties [P11]
+- Missing inverse relations [P13]
+
+Returns a list of issues found during validation.
+"""
+
 import rdflib
 from rdflib import RDF, RDFS, OWL
 import os
 
-def run_structural_check(file_path):
+
+def run_structural_check(file_path: str) -> list:
+    """
+    Validate ontology structure and return list of issues.
+    
+    Args:
+        file_path: Path to ontology file (XML, OWL, or Turtle format)
+        
+    Returns:
+        List of validation issue strings
+    """
     g = rdflib.Graph()
     
     ext = os.path.splitext(file_path)[1].lower()
-    if ext == ".xml" or ext == ".owl":
+    if ext in [".xml", ".owl"]:
         g.parse(file_path, format="xml")
     else:
         g.parse(file_path, format="turtle")
     
     issues = []
     
-    for s in g.subjects(RDF.type, OWL.Class):
-        if not list(g.objects(s, RDFS.comment)):
-            issues.append(f"[P08] Missing comment for Class: {str(s).split('/')[-1].split('#')[-1]}")
+    for cls in g.subjects(RDF.type, OWL.Class):
+        if not list(g.objects(cls, RDFS.comment)):
+            issues.append(f"[P08] Missing comment for Class: {str(cls).split('/')[-1].split('#')[-1]}")
             
-    for s in g.subjects(RDF.type, None):
-        if (s, RDF.type, OWL.Class) not in g and (s, RDF.type, OWL.ObjectProperty) not in g:
-            if not list(g.objects(s, RDFS.comment)):
-                 issues.append(f"[P08] Missing comment for Individual/Property: {str(s).split('/')[-1].split('#')[-1]}")
+    for individual in g.subjects(RDF.type, None):
+        is_class = (individual, RDF.type, OWL.Class) in g
+        is_obj_prop = (individual, RDF.type, OWL.ObjectProperty) in g
+        if not is_class and not is_obj_prop:
+            if not list(g.objects(individual, RDFS.comment)):
+                issues.append(f"[P08] Missing comment for Individual/Property: {str(individual).split('/')[-1].split('#')[-1]}")
 
-    for p in g.subjects(RDF.type, OWL.ObjectProperty):
-        if not list(g.objects(p, RDFS.domain)):
-            issues.append(f"[P11] Missing Domain for Property: {str(p).split('/')[-1].split('#')[-1]}")
-        if not list(g.objects(p, RDFS.range)):
-            issues.append(f"[P11] Missing Range for Property: {str(p).split('/')[-1].split('#')[-1]}")
+    for prop in g.subjects(RDF.type, OWL.ObjectProperty):
+        if not list(g.objects(prop, RDFS.domain)):
+            issues.append(f"[P11] Missing Domain for Property: {str(prop).split('/')[-1].split('#')[-1]}")
+        if not list(g.objects(prop, RDFS.range)):
+            issues.append(f"[P11] Missing Range for Property: {str(prop).split('/')[-1].split('#')[-1]}")
 
-    for p in g.subjects(RDF.type, OWL.ObjectProperty):
-        if not list(g.objects(p, OWL.inverseOf)):
-            issues.append(f"[P13-Warning] No inverse relation for: {str(p).split('/')[-1].split('#')[-1]}")
+    for prop in g.subjects(RDF.type, OWL.ObjectProperty):
+        if not list(g.objects(prop, OWL.inverseOf)):
+            issues.append(f"[P13-Warning] No inverse relation for: {str(prop).split('/')[-1].split('#')[-1]}")
 
     return issues
+
 
 if __name__ == "__main__":
     file_to_check = "UCO_FINAL_COMP.xml"

@@ -1,3 +1,17 @@
+"""
+Complete Ontology Enrichment Pipeline
+
+This is the main orchestrator that coordinates all pipeline steps:
+1. Co-occurrence extraction from cyber events database
+2. Classification and ranking of term pairs
+3. Semantic mapping to ontology classes
+4. TBox enrichment with new classes
+5. ABox injection from structured data
+6. Final validation, reasoning, and reporting
+
+Run this script for complete pipeline execution from raw data to validated KB.
+"""
+
 import os
 import sys
 import time
@@ -6,26 +20,31 @@ import rdflib
 from rdflib import RDF, RDFS, OWL, XSD, Literal, URIRef
 from owlready2 import *
 from tqdm import tqdm
+
 from findcouples import OntologyEnricher
 from addentities import enrich_tbox_rdflib
 from kbonto import run_validated_injection
 from structural_validator import run_structural_check
 from competecy_questions import run_competency_queries
 
+
 def install_requirements():
+    """Install Python dependencies from requirements.txt."""
     req_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "requirements.txt")
     if os.path.exists(req_path):
         try:
             subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "-r", req_path])
-        except:
+        except Exception:
             pass
 
+
 def setup_java():
+    """Configure Java environment for Pellet reasoner."""
     if sys.platform == "darwin":
         try:
             java_home = subprocess.check_output(['/usr/libexec/java_home']).decode().strip()
             owlready2.JAVA_EXE = os.path.join(java_home, "bin", "java")
-        except:
+        except Exception:
             owlready2.JAVA_EXE = "java"
     else:
         java_paths = [
@@ -39,48 +58,72 @@ def setup_java():
                 break
     owlready2.reasoning.JAVA_MEMORY = 16000
 
+
 def main():
+    """Execute complete ontology enrichment pipeline."""
     install_requirements()
     setup_java()
     start_time = time.time()
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
-    os.system(f"{sys.executable} cooccorrenze.py")
-    os.system(f"{sys.executable} cooccorrenzeclassifier.py")
+    print("=" * 60)
+    print("STEP 1-2: Co-occurrence Analysis")
+    print("=" * 60)
+    subprocess.run([sys.executable, "cooccorrenze.py"], check=True)
+    subprocess.run([sys.executable, "cooccorrenzeclassifier.py"], check=True)
     
+    print("\n" + "=" * 60)
+    print("STEP 3: Semantic Mapping")
+    print("=" * 60)
     enricher = OntologyEnricher()
     enricher.run("classifica_cooccorrenze.xlsx", "uco_1_5.ttl", "ontologyadd.xlsx")
     
+    print("\n" + "=" * 60)
+    print("STEP 4: TBox Enrichment")
+    print("=" * 60)
     enrich_tbox_rdflib()
+    
+    print("\n" + "=" * 60)
+    print("STEP 5: ABox Injection")
+    print("=" * 60)
     run_validated_injection()
 
-    xml_file = os.path.join(base_dir, "UCO_FINAL.xml")
+    xml_file = os.path.join(base_dir, "UCO_FINAL_COMP.xml")
     inferred_file = os.path.join(base_dir, "UCO_INFERRED.ttl")
     log_file = os.path.join(base_dir, "LOG_VALIDAZIONE.txt")
     query_results = os.path.join(base_dir, "RISULTATI_QUERY_CQ.txt")
 
     if not os.path.exists(xml_file):
-        raise FileNotFoundError(xml_file)
+        raise FileNotFoundError(f"Required file not found: {xml_file}")
 
+    print("\n" + "=" * 60)
+    print("STEP 6a: Pre-Inference Analysis")
+    print("=" * 60)
     g_raw = rdflib.Graph()
     g_raw.parse(xml_file, format="xml")
     triples_raw = len(g_raw)
+    print(f"Pre-inference triples: {triples_raw:,}")
 
+    print("\nLoading ontology for reasoning...")
     onto = get_ontology(os.path.abspath(xml_file)).load()
     
+    print("Running Pellet reasoner...")
     inference_status = "Unknown"
     try:
         with onto:
             sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True, debug=0)
         inference_status = "Consistent"
+        print("Ontology is consistent.")
     except Exception as e:
         inference_status = f"Error: {str(e)}"
+        print(f"Reasoning error: {inference_status}")
 
+    print("Cleaning inferred graph...")
     for prop in tqdm(list(onto.properties()), desc="Cleaning properties"):
         try:
             if (ObjectProperty in prop.is_a) and (DatatypeProperty in prop.is_a):
                 prop.is_a.remove(ObjectProperty)
-        except:
+        except Exception:
             continue
 
     g_clean = rdflib.Graph()
@@ -93,9 +136,13 @@ def main():
         g_clean.add((s, p, o))
 
     g_clean.serialize(destination=inferred_file, format="turtle")
+    print(f"Inferred ontology saved to: {inferred_file}")
 
+    print("\n" + "=" * 60)
+    print("STEP 6b: Validation & Competency Questions")
+    print("=" * 60)
     structural_issues = run_structural_check(xml_file)
-    run_competency_queries(inferred_file, query_results)
+    executed_cq, informative_cq = run_competency_queries(inferred_file, query_results)
     
     triples_inf = len(g_clean)
     n_classes = len(list(g_clean.subjects(RDF.type, OWL.Class)))
@@ -115,37 +162,63 @@ def main():
         depth = len(list(g_clean.transitive_objects(cls, RDFS.subClassOf)))
         hierarchical_depth = max(hierarchical_depth, depth)
 
-    cq_count = 0
-    if os.path.exists(query_results):
-        with open(query_results, "r", encoding="utf-8") as qr:
-            cq_count = qr.read().count("QUERY:")
-
     with open(log_file, "w", encoding="utf-8") as f:
-        f.write("REPORT TECNICO DI VALIDAZIONE E METRICHE\n\n")
+        f.write("=" * 70 + "\n")
+        f.write("COMPREHENSIVE VALIDATION AND INFERENCE REPORT\n")
+        f.write("=" * 70 + "\n\n")
         f.write(f"Timestamp esecuzione: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"Esito coerenza logica: {inference_status}\n")
         f.write(f"Durata totale pipeline: {round(time.time() - start_time, 2)}s\n\n")
-        f.write("VALUTAZIONE CRESCITA INFERENZIALE\n")
-        f.write(f"Volume triple base: {triples_raw}\n")
-        f.write(f"Volume triple inferite: {triples_inf}\n")
-        f.write(f"Nuova conoscenza prodotta: {inf_gain} affermazioni\n")
-        f.write(f"Coefficiente di espansione: {gain_pct}%\n\n")
-        f.write("DESCRITTORI STRUTTURALI E COMPLESSITA\n")
-        f.write(f"Classi totali: {n_classes}\n")
-        f.write(f"Individui totali: {n_individuals}\n")
-        f.write(f"Proprieta totali: {n_properties}\n")
-        f.write(f"Rapporto istanze per classe: {connectivity_ratio}\n")
-        f.write(f"Indice di ricchezza semantica: {semantic_richness}\n")
-        f.write(f"Grado di densita relazionale: {rel_density}\n")
-        f.write(f"Profondita gerarchica massima: {hierarchical_depth}\n\n")
-        f.write("EFFICACIA INFORMATIVA (COMPETENCY QUESTIONS)\n")
-        f.write(f"Quesiti SPARQL risolti: {cq_count}/20\n\n")
-        f.write("PITFALLS E ANOMALIE RILEVATE\n")
+        
+        f.write("-" * 60 + "\n")
+        f.write("ONTOLOGY COMPARISON: PRE vs POST INFERENCE\n")
+        f.write("-" * 60 + "\n")
+        f.write(f"{'Metric':<35} {'Pre':>12} {'Post':>12} {'Change':>12}\n")
+        f.write(f"{'Total Triples':<35} {triples_raw:>12,} {triples_inf:>12,} {inf_gain:>+12,}\n")
+        f.write(f"{'Classes':<35} {n_classes:>12,} {n_classes:>12,} {'0':>12}\n")
+        f.write(f"{'Individuals':<35} {n_individuals:>12,} {n_individuals:>12,} {'0':>12}\n")
+        f.write(f"{'Properties':<35} {n_properties:>12,} {n_properties:>12,} {'0':>12}\n")
+        f.write(f"\nExpansion Coefficient: {gain_pct}%\n")
+        f.write(f"New Knowledge: {inf_gain:,} triples\n\n")
+        
+        f.write("-" * 60 + "\n")
+        f.write("STRUCTURAL METRICS\n")
+        f.write("-" * 60 + "\n")
+        f.write(f"Relational Density: {rel_density}\n")
+        f.write(f"Connectivity Ratio: {connectivity_ratio}\n")
+        f.write(f"Semantic Richness: {semantic_richness}\n")
+        f.write(f"Hierarchical Depth: {hierarchical_depth}\n\n")
+        
+        f.write("-" * 60 + "\n")
+        f.write("COMPETENCY QUESTIONS\n")
+        f.write("-" * 60 + "\n")
+        f.write(f"Queries Executed: {executed_cq}\n")
+        f.write(f"Informative Queries: {informative_cq}\n")
+        if executed_cq > 0:
+            f.write(f"Coverage: {round(informative_cq/executed_cq*100, 1)}%\n\n")
+        
+        f.write("-" * 60 + "\n")
+        f.write("STRUCTURAL VALIDATION\n")
+        f.write("-" * 60 + "\n")
         if not structural_issues:
-            f.write("Nessuna criticita strutturale.\n")
+            f.write("No structural issues detected.\n")
         else:
+            issue_counts = {}
             for issue in structural_issues:
-                f.write(f"{issue}\n")
+                code = issue.split()[0]
+                issue_counts[code] = issue_counts.get(code, 0) + 1
+            for code, count in sorted(issue_counts.items()):
+                f.write(f"{code}: {count} occurrences\n")
+        
+        f.write("\n" + "=" * 70 + "\n")
+        f.write("END OF REPORT\n")
+        f.write("=" * 70 + "\n")
+
+    print(f"\nPipeline complete. Reports saved to:")
+    print(f"  - {log_file}")
+    print(f"  - {query_results}")
+    print(f"  - {inferred_file}")
+
 
 if __name__ == "__main__":
     main()

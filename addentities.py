@@ -1,8 +1,20 @@
+"""
+Step 4: TBox Enrichment
+
+This module enriches the ontology's TBox by adding new classes derived from 
+the semantic mapping step. It reads mappings from ontologyadd.xlsx and creates 
+new classes as subclasses of matched parent classes using RDFLib.
+
+The enriched ontology is saved in Turtle format for downstream ABox injection.
+"""
+
 import pandas as pd
 from rdflib import Graph, Literal, RDF, RDFS, OWL, Namespace, URIRef
 import os
 
+
 def enrich_tbox_rdflib():
+    """Add new classes to ontology based on semantic mappings."""
     INPUT_TTL = "uco_1_5.ttl"
     EXCEL_ADD = "ontologyadd.xlsx"
     OUTPUT_TTL = "uco_1_5_enriched.ttl"
@@ -16,9 +28,9 @@ def enrich_tbox_rdflib():
     df = pd.read_excel(EXCEL_ADD)
  
     class_map = {}
-    for s in g.subjects(RDF.type, OWL.Class):
-        short_name = str(s).split('#')[-1].split('/')[-1].lower()
-        class_map[short_name] = s
+    for cls in g.subjects(RDF.type, OWL.Class):
+        short_name = str(cls).split('#')[-1].split('/')[-1].lower()
+        class_map[short_name] = cls
 
     added_count = 0
     for _, row in df.iterrows():
@@ -47,6 +59,7 @@ def enrich_tbox_rdflib():
         added_count += 1
 
     g.serialize(destination=OUTPUT_TTL, format="turtle")
+
 
 if __name__ == "__main__":
     enrich_tbox_rdflib()
